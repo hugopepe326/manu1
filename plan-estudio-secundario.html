@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Plan de Estudio — Preparo el Secundario</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+:root { --mat:#3B82F6; --len:#7C3AED; --ok:#10B981; --err:#EF4444; }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:#F8F7FF;min-height:100vh;}
+h1,h2,h3,.fredoka{font-family:'Fredoka One',cursive;}
+nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:2px solid #E8E4FF;box-shadow:0 2px 8px rgba(109,40,217,0.07);}
+.nav-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:0;overflow-x:auto;padding:0 16px;}
+.nav-logo{font-family:'Fredoka One',cursive;font-size:20px;color:#6D28D9;padding:12px 16px 12px 0;white-space:nowrap;border-right:2px solid #E8E4FF;margin-right:8px;}
+.nav-btn{padding:10px 16px;border:none;background:transparent;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;color:#6B7280;white-space:nowrap;}
+.nav-btn.active{color:#6D28D9;border-bottom-color:#6D28D9;}
+.nav-btn:hover{color:#6D28D9;background:#F5F3FF;}
+.panel{display:none;padding:28px 20px 80px;max-width:960px;margin:0 auto;}
+.panel.active{display:block;}
+.card{background:#fff;border-radius:20px;border:2px solid #E8E4FF;padding:24px;margin-bottom:20px;box-shadow:0 2px 8px rgba(109,40,217,0.05);}
+.card-mat{border-color:#BFDBFE;}
+.card-len{border-color:#DDD6FE;}
+.card-geo{border-color:#A7F3D0;}
+.sec-header{border-radius:20px;padding:24px;margin-bottom:24px;position:relative;overflow:hidden;}
+.sec-mat{background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border:2px solid #BFDBFE;}
+.sec-len{background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border:2px solid #DDD6FE;}
+.quiz-opt{display:block;width:100%;text-align:left;padding:12px 18px;border-radius:14px;border:2px solid #E5E7EB;background:#fff;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;margin-bottom:8px;transition:all .18s;color:#374151;}
+.quiz-opt:hover:not(:disabled){border-color:#818CF8;background:#EEF2FF;color:#3730A3;}
+.quiz-opt.correct{border-color:#10B981;background:#D1FAE5;color:#065F46;}
+.quiz-opt.wrong{border-color:#EF4444;background:#FEE2E2;color:#991B1B;}
+.quiz-opt:disabled{cursor:default;}
+.quiz-input{width:100%;padding:11px 16px;border-radius:12px;border:2px solid #E5E7EB;font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;color:#374151;outline:none;transition:border .2s;}
+.quiz-input:focus{border-color:#818CF8;}
+.quiz-input.correct{border-color:#10B981;background:#D1FAE5;}
+.quiz-input.wrong{border-color:#EF4444;background:#FEE2E2;}
+.btn-check{background:#fff;color:#6D28D9;border:2px solid #DDD6FE;border-radius:12px;padding:10px 20px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;cursor:pointer;transition:all .15s;}
+.btn-check:hover{background:#F5F3FF;border-color:#A78BFA;}
+.btn-primary{background:linear-gradient(135deg,#6D28D9,#4F46E5);color:#fff;border:none;border-radius:14px;padding:13px 30px;font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 4px 14px rgba(79,70,229,0.3);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(79,70,229,0.4);}
+.btn-secondary{background:#fff;color:#6D28D9;border:2px solid #DDD6FE;border-radius:12px;padding:10px 22px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:all .15s;}
+.btn-secondary:hover{background:#F5F3FF;border-color:#A78BFA;}
+.feedback{padding:12px 16px;border-radius:12px;font-size:13px;font-weight:700;margin-top:12px;line-height:1.5;}
+.feedback.ok{background:#D1FAE5;color:#065F46;border:1.5px solid #6EE7B7;}
+.feedback.err{background:#FEE2E2;color:#991B1B;border:1.5px solid #FCA5A5;}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:800;}
+.b4{background:#FEF3C7;color:#92400E;}
+.b5{background:#D1FAE5;color:#064E3B;}
+.b6{background:#FCE7F3;color:#831843;}
+.bm{background:#DBEAFE;color:#1E40AF;}
+.bl{background:#EDE9FE;color:#5B21B6;}
+.prog-bar{height:10px;background:#E5E7EB;border-radius:99px;overflow:hidden;margin:6px 0;}
+.prog-fill{height:100%;border-radius:99px;transition:width .5s ease;}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;}
+.info-item{border-radius:16px;padding:16px;text-align:center;}
+.match-col{display:flex;flex-direction:column;gap:8px;}
+.match-item{padding:10px 14px;border-radius:12px;border:2px solid #E5E7EB;background:#fff;font-weight:700;font-size:13px;cursor:pointer;transition:all .2s;line-height:1.4;}
+.match-item.sel-l{border-color:#6D28D9;background:#EDE9FE;color:#4C1D95;}
+.match-item.sel-r{border-color:#3B82F6;background:#DBEAFE;color:#1E3A8A;}
+.match-item.matched{border-color:#10B981;background:#D1FAE5;color:#065F46;cursor:default;}
+.match-item.bad{border-color:#EF4444;background:#FEE2E2;color:#991B1B;animation:shake .3s;}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.timeline{position:relative;padding-left:30px;}
+.timeline::before{content:'';position:absolute;left:9px;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,#6D28D9,#3B82F6);border-radius:3px;}
+.tl-item{position:relative;margin-bottom:18px;}
+.tl-dot{position:absolute;left:-27px;top:8px;width:14px;height:14px;border-radius:50%;border:3px solid #6D28D9;background:#fff;}
+.tl-dot.done{background:#6D28D9;}
+.hidden{display:none!important;}
+.score-display{font-family:'Fredoka One',cursive;font-size:52px;color:#6D28D9;line-height:1;}
+.medal-big{font-size:52px;}
+.q-number{font-size:11px;color:#9CA3AF;font-weight:700;margin-bottom:4px;}
+.q-text{font-size:15px;font-weight:800;color:#1F2937;margin:0 0 12px;line-height:1.5;}
+.divider{border-top:1.5px dashed #E5E7EB;margin:8px 0 18px;}
+.divider-mat{border-top:1.5px dashed #BFDBFE;margin:8px 0 18px;}
+.divider-len{border-top:1.5px dashed #DDD6FE;margin:8px 0 18px;}
+.caso-box{background:#F0F9FF;border-radius:16px;padding:16px;border:2px solid #BAE6FD;margin-bottom:14px;}
+.caso-title{font-family:'Fredoka One',cursive;font-size:14px;color:#0369A1;margin-bottom:6px;}
+.caso-text{font-size:13px;color:#374151;font-weight:700;line-height:1.6;}
+.formula-box{background:#EDE9FE;border-radius:12px;padding:12px 16px;border:2px solid #A78BFA;font-family:'Fredoka One',cursive;font-size:15px;color:#4C1D95;text-align:center;}
+.tip-box{background:#FEF3C7;border-radius:12px;padding:12px 16px;border:2px solid #FDE68A;font-size:13px;font-weight:700;color:#92400E;margin-top:12px;line-height:1.5;}
+@media(max-width:600px){.nav-btn{padding:10px 8px;font-size:11px;}.panel{padding:14px 10px 60px;}.card{padding:14px;}.info-grid{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">⭐ Mi Estudio</span>
+    <button class="nav-btn active" onclick="go('inicio')">🏠 Inicio</button>
+    <button class="nav-btn" onclick="go('mat-num')">🔢 Números</button>
+    <button class="nav-btn" onclick="go('mat-geo')">📐 Geometría</button>
+    <button class="nav-btn" onclick="go('len-gram')">🔤 Gramática</button>
+    <button class="nav-btn" onclick="go('len-texto')">📚 Textos</button>
+    <button class="nav-btn" onclick="go('repaso')">🏆 Repaso Final</button>
+    <button class="nav-btn" onclick="go('progreso')">📊 Progreso</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════ INICIO ═══════════════════════════ -->
+<div id="panel-inicio" class="panel active">
+  <div style="text-align:center;padding:32px 0 20px;">
+    <div style="font-size:64px;margin-bottom:10px;">🎒</div>
+    <h1 class="fredoka" style="font-size:38px;color:#4C1D95;margin-bottom:8px;">¡Preparo el Secundario!</h1>
+    <p style="color:#6B7280;font-size:16px;max-width:540px;margin:0 auto;font-weight:600;">Tu plan completo de estudio basado en los NAP y las Progresiones de Aprendizaje de Córdoba.</p>
+  </div>
+
+  <div class="card" style="background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border-color:#DDD6FE;">
+    <h2 class="fredoka" style="color:#4C1D95;font-size:22px;margin-bottom:16px;">📊 ¿Qué hay en este plan?</h2>
+    <div class="info-grid">
+      <div class="info-item" style="background:#fff;border:2px solid #BFDBFE;">
+        <div style="font-family:'Fredoka One',cursive;font-size:40px;color:#2563EB;">4</div>
+        <div style="font-size:13px;font-weight:700;color:#1E40AF;margin-top:4px;">módulos temáticos</div>
+      </div>
+      <div class="info-item" style="background:#fff;border:2px solid #DDD6FE;">
+        <div style="font-family:'Fredoka One',cursive;font-size:40px;color:#7C3AED;">20+</div>
+        <div style="font-size:13px;font-weight:700;color:#5B21B6;margin-top:4px;">quizzes y actividades</div>
+      </div>
+      <div class="info-item" style="background:#fff;border:2px solid #A7F3D0;">
+        <div style="font-family:'Fredoka One',cursive;font-size:40px;color:#059669;">100+</div>
+        <div style="font-size:13px;font-weight:700;color:#064E3B;margin-top:4px;">preguntas en total</div>
+      </div>
+      <div class="info-item" style="background:#fff;border:2px solid #FDE68A;">
+        <div style="font-family:'Fredoka One',cursive;font-size:40px;color:#D97706;">🏆</div>
+        <div style="font-size:13px;font-weight:700;color:#92400E;margin-top:4px;">medallas y puntaje</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 class="fredoka" style="color:#4C1D95;font-size:22px;margin-bottom:20px;">🗺️ Plan de 6 semanas</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot done"></div>
+        <div style="background:#FEF3C7;border-radius:14px;padding:14px;border:2px solid #FDE68A;">
+          <div class="fredoka" style="color:#92400E;font-size:16px;">Semana 1 — Diagnóstico inicial</div>
+          <p style="color:#78350F;font-size:13px;font-weight:600;margin-top:4px;">Hacé las primeras preguntas de cada módulo para ver en qué estás bien y qué necesitás repasar.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div style="background:#EFF6FF;border-radius:14px;padding:14px;border:2px solid #BFDBFE;">
+          <div class="fredoka" style="color:#1E40AF;font-size:16px;">Semanas 2–3 — Módulo Números (Matemática)</div>
+          <p style="color:#374151;font-size:13px;font-weight:600;margin-top:4px;">Operaciones, fracciones, decimales, proporcionalidad, porcentajes, potencias y raíces.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div style="background:#F0FDF4;border-radius:14px;padding:14px;border:2px solid #A7F3D0;">
+          <div class="fredoka" style="color:#065F46;font-size:16px;">Semana 3 — Módulo Geometría (Matemática)</div>
+          <p style="color:#374151;font-size:13px;font-weight:600;margin-top:4px;">Figuras, ángulos, perímetros, áreas, volúmenes y cuerpos geométricos.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div style="background:#F5F3FF;border-radius:14px;padding:14px;border:2px solid #DDD6FE;">
+          <div class="fredoka" style="color:#4C1D95;font-size:16px;">Semanas 4–5 — Módulos Gramática y Textos (Lengua)</div>
+          <p style="color:#374151;font-size:13px;font-weight:600;margin-top:4px;">Clases de palabras, tiempos verbales, sintaxis, ortografía, tipos de texto y comprensión.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div style="background:linear-gradient(135deg,#FEF3C7,#FDE68A);border-radius:14px;padding:14px;border:2px solid #FDE68A;">
+          <div class="fredoka" style="color:#92400E;font-size:16px;">Semana 6 — Repaso Final Integrador 🏆</div>
+          <p style="color:#78350F;font-size:13px;font-weight:600;margin-top:4px;">Examen con preguntas de todas las materias. ¡Ganás tu medalla de ingreso al secundario!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="background:#F9FAFB;">
+    <h2 class="fredoka" style="color:#4C1D95;font-size:20px;margin-bottom:14px;">📌 Basado en:</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div style="background:#EFF6FF;border-radius:14px;padding:14px;border:2px solid #BFDBFE;">
+        <div style="font-size:24px;margin-bottom:6px;">📐</div>
+        <div class="fredoka" style="color:#1E40AF;font-size:14px;margin-bottom:4px;">NAP Nacionales</div>
+        <p style="font-size:12px;color:#3B82F6;font-weight:700;margin:0;">Núcleos de Aprendizajes Prioritarios — Ministerio de Educación</p>
+      </div>
+      <div style="background:#F5F3FF;border-radius:14px;padding:14px;border:2px solid #DDD6FE;">
+        <div style="font-size:24px;margin-bottom:6px;">🏛️</div>
+        <div class="fredoka" style="color:#5B21B6;font-size:14px;margin-bottom:4px;">Córdoba</div>
+        <p style="font-size:12px;color:#7C3AED;font-weight:700;margin:0;">Progresiones de Aprendizaje — Diseño Curricular Provincial</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding-top:8px;">
+    <button class="btn-primary" onclick="go('mat-num')" style="font-size:17px;padding:15px 44px;">¡Empezar con Números! →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ MATEMÁTICA: NÚMEROS ═══════════════════════════ -->
+<div id="panel-mat-num" class="panel">
+  <div class="sec-header sec-mat">
+    <div style="font-size:40px;">🔢</div>
+    <h2 class="fredoka" style="color:#1E40AF;font-size:28px;margin:8px 0 4px;">Matemática — Números y Operaciones</h2>
+    <p style="color:#3B82F6;font-weight:700;margin:0;font-size:14px;">4°, 5° y 6° Grado</p>
+  </div>
+
+  <!-- INFOGRAFÍA: Sistema de numeración -->
+  <div class="card card-mat">
+    <h3 class="fredoka" style="color:#1E40AF;font-size:20px;margin-bottom:14px;">📊 Infografía: El Sistema de Numeración</h3>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:13px;">
+        <tr style="background:#DBEAFE;">
+          <th style="padding:10px 12px;text-align:left;border-radius:10px 0 0 0;color:#1E40AF;font-family:'Fredoka One',cursive;">Período</th>
+          <th style="padding:10px 12px;text-align:center;color:#1E40AF;font-family:'Fredoka One',cursive;">Millones</th>
+          <th style="padding:10px 12px;text-align:center;color:#1E40AF;font-family:'Fredoka One',cursive;">Centenas de mil</th>
+          <th style="padding:10px 12px;text-align:center;color:#1E40AF;font-family:'Fredoka One',cursive;">Decenas de mil</th>
+          <th style="padding:10px 12px;text-align:center;color:#1E40AF;font-family:'Fredoka One',cursive;">Unidades de mil</th>
+          <th style="padding:10px 12px;text-align:center;color:#1E40AF;font-family:'Fredoka One',cursive;">Centenas</th>
+          <th style="padding:10px 12px;text-align:center;color:#1E40AF;font-family:'Fredoka One',cursive;">Decenas</th>
+          <th style="padding:10px 12px;text-align:center;color:#1E40AF;font-family:'Fredoka One',cursive;border-radius:0 10px 0 0;">Unidades</th>
+        </tr>
+        <tr style="background:#EFF6FF;">
+          <td style="padding:10px 12px;font-weight:800;color:#2563EB;">Ejemplo</td>
+          <td style="padding:10px 12px;text-align:center;font-family:'Fredoka One',cursive;font-size:20px;color:#1D4ED8;">3</td>
+          <td style="padding:10px 12px;text-align:center;font-family:'Fredoka One',cursive;font-size:20px;color:#2563EB;">4</td>
+          <td style="padding:10px 12px;text-align:center;font-family:'Fredoka One',cursive;font-size:20px;color:#3B82F6;">7</td>
+          <td style="padding:10px 12px;text-align:center;font-family:'Fredoka One',cursive;font-size:20px;color:#60A5FA;">2</td>
+          <td style="padding:10px 12px;text-align:center;font-family:'Fredoka One',cursive;font-size:20px;color:#7C3AED;">5</td>
+          <td style="padding:10px 12px;text-align:center;font-family:'Fredoka One',cursive;font-size:20px;color:#9333EA;">0</td>
+          <td style="padding:10px 12px;text-align:center;font-family:'Fredoka One',cursive;font-size:20px;color:#A21CAF;">9</td>
+        </tr>
+        <tr style="background:#F8FAFF;">
+          <td style="padding:8px 12px;font-weight:700;color:#6B7280;font-size:12px;">Se lee:</td>
+          <td colspan="7" style="padding:8px 12px;font-weight:800;color:#1E40AF;font-size:13px;">Tres millones, cuatrocientos setenta y dos mil, quinientos nueve</td>
+        </tr>
+      </table>
+    </div>
+    <div class="tip-box" style="margin-top:14px;">💡 <strong>Truco:</strong> Separá el número en grupos de 3 desde la derecha: <strong>3.472.509</strong>. El grupo de la derecha son las unidades, el del medio los miles y el de la izquierda los millones.</div>
+  </div>
+
+  <!-- QUIZ 1: Numeración -->
+  <div class="card card-mat">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:26px;">🧮</span>
+      <div>
+        <h3 class="fredoka" style="color:#1E40AF;font-size:19px;">Quiz 1: Sistema de Numeración</h3>
+        <div style="display:flex;gap:5px;margin-top:3px;"><span class="badge b4">4°</span><span class="badge b5">5°</span></div>
+      </div>
+    </div>
+    <div id="q-num1"></div>
+  </div>
+
+  <!-- INFOGRAFÍA: Operaciones -->
+  <div class="card card-mat">
+    <h3 class="fredoka" style="color:#1E40AF;font-size:20px;margin-bottom:14px;">⚙️ Infografía: Las 4 Operaciones Básicas</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;">
+      <div style="border-radius:14px;padding:14px;background:#EFF6FF;border:2px solid #93C5FD;">
+        <div style="font-size:32px;font-family:'Fredoka One',cursive;color:#2563EB;margin-bottom:6px;">+</div>
+        <div class="fredoka" style="color:#1E40AF;font-size:16px;margin-bottom:6px;">Suma</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.6;">Junta cantidades.<br><span style="color:#2563EB;">sumando + sumando = suma</span><br>¿Cuánto hay en total?</div>
+        <div style="background:#fff;border-radius:10px;padding:8px;margin-top:8px;font-size:13px;font-weight:800;color:#1E40AF;text-align:center;">1.456 + 2.831 = 4.287</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#FEF3C7;border:2px solid #FDE68A;">
+        <div style="font-size:32px;font-family:'Fredoka One',cursive;color:#D97706;margin-bottom:6px;">−</div>
+        <div class="fredoka" style="color:#92400E;font-size:16px;margin-bottom:6px;">Resta</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.6;">Quita cantidades.<br><span style="color:#D97706;">minuendo − sustraendo = diferencia</span><br>¿Cuánto queda?</div>
+        <div style="background:#fff;border-radius:10px;padding:8px;margin-top:8px;font-size:13px;font-weight:800;color:#92400E;text-align:center;">5.000 − 1.348 = 3.652</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#D1FAE5;border:2px solid #6EE7B7;">
+        <div style="font-size:32px;font-family:'Fredoka One',cursive;color:#059669;margin-bottom:6px;">×</div>
+        <div class="fredoka" style="color:#065F46;font-size:16px;margin-bottom:6px;">Multiplicación</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.6;">Suma repetida.<br><span style="color:#059669;">factor × factor = producto</span><br>¿Cuánto hay en varios grupos?</div>
+        <div style="background:#fff;border-radius:10px;padding:8px;margin-top:8px;font-size:13px;font-weight:800;color:#065F46;text-align:center;">48 × 25 = 1.200</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#FCE7F3;border:2px solid #F9A8D4;">
+        <div style="font-size:32px;font-family:'Fredoka One',cursive;color:#DB2777;margin-bottom:6px;">÷</div>
+        <div class="fredoka" style="color:#831843;font-size:16px;margin-bottom:6px;">División</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.6;">Reparte en partes iguales.<br><span style="color:#DB2777;">dividendo ÷ divisor = cociente</span><br>¿Cuánto le toca a cada uno?</div>
+        <div style="background:#fff;border-radius:10px;padding:8px;margin-top:8px;font-size:13px;font-weight:800;color:#831843;text-align:center;">336 ÷ 8 = 42</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ 2: Operaciones con casos de la vida real -->
+  <div class="card card-mat">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:26px;">🛒</span>
+      <div>
+        <h3 class="fredoka" style="color:#1E40AF;font-size:19px;">Quiz 2: Problemas de la Vida Real</h3>
+        <div style="display:flex;gap:5px;margin-top:3px;"><span class="badge b4">4°</span><span class="badge b5">5°</span></div>
+      </div>
+    </div>
+    <div id="q-num2"></div>
+  </div>
+
+  <!-- INFOGRAFÍA: Fracciones completa -->
+  <div class="card card-mat">
+    <h3 class="fredoka" style="color:#1E40AF;font-size:20px;margin-bottom:14px;">🍕 Infografía: Fracciones — Todo lo que necesitás saber</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:14px;">
+      <div style="border-radius:14px;padding:14px;background:#EFF6FF;border:2px solid #93C5FD;">
+        <div class="fredoka" style="color:#1E40AF;font-size:15px;margin-bottom:8px;">Fracción propia</div>
+        <div style="text-align:center;margin:8px 0;">
+          <span style="display:block;border-bottom:3px solid #3B82F6;font-family:'Fredoka One';font-size:28px;color:#1E40AF;line-height:1.2;">3</span>
+          <span style="font-family:'Fredoka One';font-size:28px;color:#3B82F6;line-height:1.4;">4</span>
+        </div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.5;">Numerador &lt; Denominador. Representa menos que 1 entero. <br>3/4 = 0,75</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#F5F3FF;border:2px solid #A78BFA;">
+        <div class="fredoka" style="color:#5B21B6;font-size:15px;margin-bottom:8px;">Fracción impropia</div>
+        <div style="text-align:center;margin:8px 0;">
+          <span style="display:block;border-bottom:3px solid #7C3AED;font-family:'Fredoka One';font-size:28px;color:#4C1D95;line-height:1.2;">7</span>
+          <span style="font-family:'Fredoka One';font-size:28px;color:#7C3AED;line-height:1.4;">4</span>
+        </div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.5;">Numerador ≥ Denominador. Vale más que 1 entero.<br>7/4 = 1 entero y 3/4</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#D1FAE5;border:2px solid #6EE7B7;">
+        <div class="fredoka" style="color:#065F46;font-size:15px;margin-bottom:8px;">Fracciones equivalentes</div>
+        <div style="text-align:center;font-family:'Fredoka One';font-size:18px;color:#059669;margin:8px 0;line-height:2;">1/2 = 2/4 = 3/6 = 4/8</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.5;">Representan lo mismo aunque tengan distintos números. Se obtienen multiplicando o dividiendo numerador y denominador por el mismo número.</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#FEF3C7;border:2px solid #FDE68A;">
+        <div class="fredoka" style="color:#92400E;font-size:15px;margin-bottom:8px;">Fracción y decimal</div>
+        <div style="text-align:center;font-size:13px;font-weight:800;color:#D97706;margin:8px 0;line-height:2;">1/2 = 0,5<br>1/4 = 0,25<br>3/4 = 0,75<br>1/5 = 0,2</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.5;">Para convertir: dividí el numerador por el denominador.</div>
+      </div>
+    </div>
+    <!-- Suma y resta de fracciones -->
+    <div style="background:#F0F9FF;border-radius:14px;padding:14px;border:2px solid #BAE6FD;">
+      <div class="fredoka" style="color:#0C4A6E;font-size:15px;margin-bottom:10px;">Sumar y restar fracciones:</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div style="background:#fff;border-radius:12px;padding:12px;border:1.5px solid #BAE6FD;">
+          <div style="font-size:12px;font-weight:800;color:#0369A1;margin-bottom:6px;">✅ Mismo denominador:</div>
+          <div style="font-family:'Fredoka One',cursive;font-size:16px;color:#1E40AF;text-align:center;">2/7 + 3/7 = 5/7</div>
+          <div style="font-size:11px;color:#6B7280;font-weight:700;margin-top:4px;text-align:center;">Sumás los numeradores, el denominador queda igual.</div>
+        </div>
+        <div style="background:#fff;border-radius:12px;padding:12px;border:1.5px solid #BAE6FD;">
+          <div style="font-size:12px;font-weight:800;color:#0369A1;margin-bottom:6px;">⚠️ Distinto denominador:</div>
+          <div style="font-family:'Fredoka One',cursive;font-size:14px;color:#1E40AF;text-align:center;">1/2 + 1/3 = 3/6 + 2/6 = 5/6</div>
+          <div style="font-size:11px;color:#6B7280;font-weight:700;margin-top:4px;text-align:center;">Buscás el MCM como denominador común.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ 3: Fracciones -->
+  <div class="card card-mat">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:26px;">🍕</span>
+      <div>
+        <h3 class="fredoka" style="color:#1E40AF;font-size:19px;">Quiz 3: Fracciones</h3>
+        <div style="display:flex;gap:5px;margin-top:3px;"><span class="badge b4">4°</span><span class="badge b5">5°</span><span class="badge b6">6°</span></div>
+      </div>
+    </div>
+    <div id="q-num3"></div>
+  </div>
+
+  <!-- INFOGRAFÍA: Decimales -->
+  <div class="card card-mat">
+    <h3 class="fredoka" style="color:#1E40AF;font-size:20px;margin-bottom:14px;">💰 Infografía: Números Decimales</h3>
+    <div style="overflow-x:auto;margin-bottom:14px;">
+      <table style="width:100%;border-collapse:collapse;font-size:13px;min-width:420px;">
+        <tr style="background:#DBEAFE;">
+          <th style="padding:10px;text-align:center;color:#1E40AF;font-family:'Fredoka One',cursive;">Unidades</th>
+          <th style="padding:10px;text-align:center;color:#fff;background:#3B82F6;">.</th>
+          <th style="padding:10px;text-align:center;color:#1E40AF;font-family:'Fredoka One',cursive;">Décimos</th>
+          <th style="padding:10px;text-align:center;color:#1E40AF;font-family:'Fredoka One',cursive;">Centésimos</th>
+          <th style="padding:10px;text-align:center;color:#1E40AF;font-family:'Fredoka One',cursive;">Milésimos</th>
+        </tr>
+        <tr style="background:#EFF6FF;">
+          <td style="padding:10px;text-align:center;font-family:'Fredoka One',cursive;font-size:22px;color:#1D4ED8;">5</td>
+          <td style="padding:10px;text-align:center;font-family:'Fredoka One',cursive;font-size:22px;color:#fff;background:#3B82F6;">.</td>
+          <td style="padding:10px;text-align:center;font-family:'Fredoka One',cursive;font-size:22px;color:#2563EB;">7</td>
+          <td style="padding:10px;text-align:center;font-family:'Fredoka One',cursive;font-size:22px;color:#7C3AED;">3</td>
+          <td style="padding:10px;text-align:center;font-family:'Fredoka One',cursive;font-size:22px;color:#DB2777;">2</td>
+        </tr>
+        <tr style="background:#F8FAFF;">
+          <td style="padding:8px 10px;text-align:center;font-size:11px;font-weight:700;color:#6B7280;">× 1</td>
+          <td style="background:#3B82F6;"></td>
+          <td style="padding:8px 10px;text-align:center;font-size:11px;font-weight:700;color:#6B7280;">× 1/10</td>
+          <td style="padding:8px 10px;text-align:center;font-size:11px;font-weight:700;color:#6B7280;">× 1/100</td>
+          <td style="padding:8px 10px;text-align:center;font-size:11px;font-weight:700;color:#6B7280;">× 1/1000</td>
+        </tr>
+      </table>
+    </div>
+    <p style="font-size:14px;font-weight:800;color:#1E40AF;text-align:center;margin:0 0 12px;">5,732 = "cinco con setecientos treinta y dos milésimos"</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div style="background:#D1FAE5;border-radius:12px;padding:12px;border:2px solid #6EE7B7;">
+        <div style="font-size:12px;font-weight:800;color:#065F46;margin-bottom:4px;">Comparar decimales:</div>
+        <div style="font-size:13px;font-weight:700;color:#374151;line-height:1.6;">0,7 > 0,35<br>Porque 7 décimos son más que 3 décimos.</div>
+      </div>
+      <div style="background:#FEF3C7;border-radius:12px;padding:12px;border:2px solid #FDE68A;">
+        <div style="font-size:12px;font-weight:800;color:#92400E;margin-bottom:4px;">En el dinero:</div>
+        <div style="font-size:13px;font-weight:700;color:#374151;line-height:1.6;">$15,50 = 15 pesos y 50 centavos<br>El punto separa pesos de centavos.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ 4: Decimales -->
+  <div class="card card-mat">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:26px;">💰</span>
+      <div>
+        <h3 class="fredoka" style="color:#1E40AF;font-size:19px;">Quiz 4: Números Decimales</h3>
+        <div style="display:flex;gap:5px;margin-top:3px;"><span class="badge b4">4°</span><span class="badge b5">5°</span></div>
+      </div>
+    </div>
+    <div id="q-num4"></div>
+  </div>
+
+  <!-- INFOGRAFÍA: Porcentajes y proporcionalidad -->
+  <div class="card card-mat">
+    <h3 class="fredoka" style="color:#1E40AF;font-size:20px;margin-bottom:14px;">💯 Infografía: Porcentajes y Proporcionalidad</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:14px;">
+      <div style="border-radius:14px;padding:14px;background:#EDE9FE;border:2px solid #A78BFA;">
+        <div class="fredoka" style="color:#5B21B6;font-size:15px;margin-bottom:8px;">¿Qué es el porcentaje?</div>
+        <div style="font-family:'Fredoka One',cursive;font-size:36px;color:#7C3AED;text-align:center;margin:6px 0;">%</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.5;">Porcentaje = "por cada cien". 25% significa 25 de cada 100 partes. Es una fracción con denominador 100.</div>
+        <div style="background:#fff;border-radius:10px;padding:8px;margin-top:8px;text-align:center;font-family:'Fredoka One',cursive;color:#5B21B6;font-size:15px;">25% = 25/100 = 0,25</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#D1FAE5;border:2px solid #6EE7B7;">
+        <div class="fredoka" style="color:#065F46;font-size:15px;margin-bottom:8px;">Calcular el % de un número</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.7;margin-bottom:8px;">Método 1: Número × porcentaje / 100<br>Método 2: Número × decimal del %</div>
+        <div style="background:#fff;border-radius:10px;padding:8px;font-size:12px;font-weight:800;color:#065F46;line-height:1.8;">30% de 200 =<br>200 × 30 ÷ 100 = <strong>60</strong><br>o: 200 × 0,30 = <strong>60</strong></div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#FEF3C7;border:2px solid #FDE68A;">
+        <div class="fredoka" style="color:#92400E;font-size:15px;margin-bottom:8px;">Proporcionalidad directa</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.5;margin-bottom:8px;">Si una cantidad aumenta, la otra también aumenta en la misma proporción.</div>
+        <div style="background:#fff;border-radius:10px;padding:8px;font-size:12px;font-weight:800;color:#92400E;line-height:1.8;">3 cajas → $600<br>6 cajas → $1.200<br>Doble de cajas = doble de precio</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;">
+      <div style="background:#DBEAFE;border-radius:12px;padding:12px;text-align:center;border:2px solid #93C5FD;">
+        <div class="fredoka" style="color:#1E40AF;font-size:13px;">10%</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;margin-top:4px;">Dividí por 10</div>
+      </div>
+      <div style="background:#D1FAE5;border-radius:12px;padding:12px;text-align:center;border:2px solid #6EE7B7;">
+        <div class="fredoka" style="color:#065F46;font-size:13px;">25%</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;margin-top:4px;">Dividí por 4</div>
+      </div>
+      <div style="background:#EDE9FE;border-radius:12px;padding:12px;text-align:center;border:2px solid #A78BFA;">
+        <div class="fredoka" style="color:#5B21B6;font-size:13px;">50%</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;margin-top:4px;">Dividí por 2</div>
+      </div>
+      <div style="background:#FEF3C7;border-radius:12px;padding:12px;text-align:center;border:2px solid #FDE68A;">
+        <div class="fredoka" style="color:#92400E;font-size:13px;">75%</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;margin-top:4px;">Multiplicá por 3 y dividí por 4</div>
+      </div>
+      <div style="background:#FCE7F3;border-radius:12px;padding:12px;text-align:center;border:2px solid #F9A8D4;">
+        <div class="fredoka" style="color:#831843;font-size:13px;">100%</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;margin-top:4px;">El número entero (total)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ 5: Porcentajes -->
+  <div class="card card-mat">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:26px;">🏷️</span>
+      <div>
+        <h3 class="fredoka" style="color:#1E40AF;font-size:19px;">Quiz 5: Porcentajes — Casos Prácticos</h3>
+        <span class="badge b6">6° grado</span>
+      </div>
+    </div>
+    <div id="q-num5"></div>
+  </div>
+
+  <!-- INFOGRAFÍA: MCM, MCD y Potenciación -->
+  <div class="card card-mat">
+    <h3 class="fredoka" style="color:#1E40AF;font-size:20px;margin-bottom:14px;">🔬 Infografía: MCM, MCD y Potenciación</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:14px;">
+      <div style="border-radius:14px;padding:14px;background:#DBEAFE;border:2px solid #93C5FD;">
+        <div class="fredoka" style="color:#1E40AF;font-size:15px;margin-bottom:6px;">MCM — Mínimo Común Múltiplo</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.5;margin-bottom:8px;">El número más chico que es múltiplo de ambos. Se usa para sumar fracciones.</div>
+        <div style="background:#fff;border-radius:10px;padding:8px;font-size:12px;font-weight:800;color:#1E40AF;line-height:1.8;">MCM(4, 6):<br>4: 4, 8, <strong style="color:#10B981;">12</strong>, 16, 20...<br>6: 6, <strong style="color:#10B981;">12</strong>, 18, 24...<br>MCM = 12</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#D1FAE5;border:2px solid #6EE7B7;">
+        <div class="fredoka" style="color:#065F46;font-size:15px;margin-bottom:6px;">MCD — Máximo Común Divisor</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.5;margin-bottom:8px;">El número más grande que divide a ambos exactamente. Se usa para simplificar fracciones.</div>
+        <div style="background:#fff;border-radius:10px;padding:8px;font-size:12px;font-weight:800;color:#065F46;line-height:1.8;">MCD(12, 18):<br>D(12): 1,2,3,4,<strong style="color:#10B981;">6</strong>,12<br>D(18): 1,2,3,<strong style="color:#10B981;">6</strong>,9,18<br>MCD = 6</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#FEF3C7;border:2px solid #FDE68A;">
+        <div class="fredoka" style="color:#92400E;font-size:15px;margin-bottom:6px;">Potenciación y Radicación</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.5;margin-bottom:8px;">Potencia = multiplicación repetida del mismo número.</div>
+        <div style="background:#fff;border-radius:10px;padding:8px;font-size:12px;font-weight:800;color:#92400E;line-height:2;">2³ = 2×2×2 = 8<br>3² = 3×3 = 9<br>√25 = 5 (raíz cuadrada)<br>√81 = 9</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ 6: MCM, MCD, Potenciación -->
+  <div class="card card-mat">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:26px;">🔬</span>
+      <div>
+        <h3 class="fredoka" style="color:#1E40AF;font-size:19px;">Quiz 6: MCM, MCD y Potenciación</h3>
+        <span class="badge b6">6° grado</span>
+      </div>
+    </div>
+    <div id="q-num6"></div>
+  </div>
+
+  <!-- QUIZ 7: Completar con cálculos -->
+  <div class="card card-mat">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:26px;">✏️</span>
+      <h3 class="fredoka" style="color:#1E40AF;font-size:19px;">Quiz 7: Calculá y escribí el resultado</h3>
+    </div>
+    <div id="q-num7"></div>
+  </div>
+
+  <div style="text-align:center;margin-top:10px;">
+    <button class="btn-primary" onclick="go('mat-geo')">Ir a Geometría →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ MATEMÁTICA: GEOMETRÍA ═══════════════════════════ -->
+<div id="panel-mat-geo" class="panel">
+  <div class="sec-header" style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7);border:2px solid #A7F3D0;">
+    <div style="font-size:40px;">📐</div>
+    <h2 class="fredoka" style="color:#065F46;font-size:28px;margin:8px 0 4px;">Matemática — Geometría y Medida</h2>
+    <p style="color:#059669;font-weight:700;margin:0;font-size:14px;">4°, 5° y 6° Grado</p>
+  </div>
+
+  <!-- INFOGRAFÍA: Ángulos -->
+  <div class="card card-geo">
+    <h3 class="fredoka" style="color:#065F46;font-size:20px;margin-bottom:14px;">📏 Infografía: Tipos de Ángulos</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px;">
+      <div style="border-radius:14px;padding:14px;background:#F0FDF4;border:2px solid #A7F3D0;text-align:center;">
+        <svg width="60" height="60" viewBox="0 0 60 60"><line x1="30" y1="50" x2="30" y2="10" stroke="#059669" stroke-width="2.5" stroke-linecap="round"/><line x1="30" y1="50" x2="50" y2="50" stroke="#059669" stroke-width="2.5" stroke-linecap="round"/><rect x="30" y="38" width="12" height="12" fill="none" stroke="#059669" stroke-width="2"/></svg>
+        <div class="fredoka" style="color:#065F46;font-size:14px;">Recto</div>
+        <div style="font-size:12px;color:#059669;font-weight:700;margin-top:4px;">= 90°</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#EFF6FF;border:2px solid #93C5FD;text-align:center;">
+        <svg width="60" height="60" viewBox="0 0 60 60"><line x1="30" y1="50" x2="15" y2="15" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round"/><line x1="30" y1="50" x2="50" y2="50" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <div class="fredoka" style="color:#1E40AF;font-size:14px;">Agudo</div>
+        <div style="font-size:12px;color:#3B82F6;font-weight:700;margin-top:4px;">&lt; 90°</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#FEF3C7;border:2px solid #FDE68A;text-align:center;">
+        <svg width="60" height="60" viewBox="0 0 60 60"><line x1="30" y1="50" x2="5" y2="20" stroke="#D97706" stroke-width="2.5" stroke-linecap="round"/><line x1="30" y1="50" x2="55" y2="50" stroke="#D97706" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <div class="fredoka" style="color:#92400E;font-size:14px;">Obtuso</div>
+        <div style="font-size:12px;color:#D97706;font-weight:700;margin-top:4px;">entre 90° y 180°</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#FCE7F3;border:2px solid #F9A8D4;text-align:center;">
+        <svg width="60" height="60" viewBox="0 0 60 60"><line x1="5" y1="35" x2="55" y2="35" stroke="#DB2777" stroke-width="2.5" stroke-linecap="round"/><line x1="30" y1="35" x2="50" y2="35" stroke="#DB2777" stroke-width="0"/></svg>
+        <div class="fredoka" style="color:#831843;font-size:14px;">Llano</div>
+        <div style="font-size:12px;color:#DB2777;font-weight:700;margin-top:4px;">= 180°</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#EDE9FE;border:2px solid #A78BFA;text-align:center;">
+        <svg width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="22" fill="#EDE9FE" stroke="#7C3AED" stroke-width="2.5"/><line x1="30" y1="30" x2="52" y2="30" stroke="#7C3AED" stroke-width="2"/></svg>
+        <div class="fredoka" style="color:#5B21B6;font-size:14px;">Completo</div>
+        <div style="font-size:12px;color:#7C3AED;font-weight:700;margin-top:4px;">= 360°</div>
+      </div>
+    </div>
+    <div class="tip-box">💡 Los 3 ángulos interiores de un triángulo siempre suman 180°. Los 4 ángulos interiores de un cuadrilátero siempre suman 360°.</div>
+  </div>
+
+  <!-- INFOGRAFÍA: Triángulos -->
+  <div class="card card-geo">
+    <h3 class="fredoka" style="color:#065F46;font-size:20px;margin-bottom:14px;">🔺 Infografía: Clasificación de Triángulos</h3>
+    <div style="margin-bottom:12px;font-size:13px;font-weight:800;color:#374151;">📐 Por sus lados:</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:16px;">
+      <div style="border-radius:14px;padding:14px;background:#F0FDF4;border:2px solid #6EE7B7;text-align:center;">
+        <svg width="60" height="50" viewBox="0 0 60 50"><polygon points="30,4 56,46 4,46" fill="#A7F3D0" stroke="#059669" stroke-width="2.5"/><text x="18" y="32" font-size="8" fill="#059669" font-weight="bold">a</text><text x="38" y="32" font-size="8" fill="#059669" font-weight="bold">a</text><text x="28" y="48" font-size="8" fill="#059669" font-weight="bold">a</text></svg>
+        <div class="fredoka" style="color:#065F46;font-size:14px;margin-top:4px;">Equilátero</div>
+        <div style="font-size:11px;color:#059669;font-weight:700;margin-top:3px;">3 lados iguales<br>3 ángulos de 60°</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#EFF6FF;border:2px solid #93C5FD;text-align:center;">
+        <svg width="60" height="50" viewBox="0 0 60 50"><polygon points="30,4 54,46 6,46" fill="#BFDBFE" stroke="#3B82F6" stroke-width="2.5"/><text x="14" y="32" font-size="8" fill="#3B82F6" font-weight="bold">a</text><text x="40" y="32" font-size="8" fill="#3B82F6" font-weight="bold">a</text><text x="28" y="48" font-size="8" fill="#3B82F6" font-weight="bold">b</text></svg>
+        <div class="fredoka" style="color:#1E40AF;font-size:14px;margin-top:4px;">Isósceles</div>
+        <div style="font-size:11px;color:#3B82F6;font-weight:700;margin-top:3px;">2 lados iguales<br>2 ángulos iguales</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#FEF3C7;border:2px solid #FDE68A;text-align:center;">
+        <svg width="60" height="50" viewBox="0 0 60 50"><polygon points="20,4 56,46 4,46" fill="#FDE68A" stroke="#D97706" stroke-width="2.5"/><text x="8" y="32" font-size="8" fill="#D97706" font-weight="bold">a</text><text x="40" y="32" font-size="8" fill="#D97706" font-weight="bold">b</text><text x="28" y="48" font-size="8" fill="#D97706" font-weight="bold">c</text></svg>
+        <div class="fredoka" style="color:#92400E;font-size:14px;margin-top:4px;">Escaleno</div>
+        <div style="font-size:11px;color:#D97706;font-weight:700;margin-top:3px;">3 lados distintos<br>3 ángulos distintos</div>
+      </div>
+    </div>
+    <div style="font-size:13px;font-weight:800;color:#374151;margin-bottom:10px;">📐 Por sus ángulos:</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;">
+      <div style="border-radius:12px;padding:12px;background:#D1FAE5;border:2px solid #6EE7B7;text-align:center;">
+        <div class="fredoka" style="color:#065F46;font-size:14px;">Acutángulo</div>
+        <div style="font-size:12px;color:#059669;font-weight:700;margin-top:4px;">Los 3 ángulos son agudos (menores de 90°)</div>
+      </div>
+      <div style="border-radius:12px;padding:12px;background:#EFF6FF;border:2px solid #93C5FD;text-align:center;">
+        <div class="fredoka" style="color:#1E40AF;font-size:14px;">Rectángulo</div>
+        <div style="font-size:12px;color:#3B82F6;font-weight:700;margin-top:4px;">Un ángulo mide exactamente 90° (recto)</div>
+      </div>
+      <div style="border-radius:12px;padding:12px;background:#FEF3C7;border:2px solid #FDE68A;text-align:center;">
+        <div class="fredoka" style="color:#92400E;font-size:14px;">Obtusángulo</div>
+        <div style="font-size:12px;color:#D97706;font-weight:700;margin-top:4px;">Un ángulo mide más de 90° (obtuso)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ 8: Ángulos y triángulos -->
+  <div class="card card-geo">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:26px;">🔺</span>
+      <div>
+        <h3 class="fredoka" style="color:#065F46;font-size:19px;">Quiz 8: Ángulos y Triángulos</h3>
+        <span class="badge b5">5° grado</span>
+      </div>
+    </div>
+    <div id="q-geo1"></div>
+  </div>
+
+  <!-- INFOGRAFÍA: Perímetro y Área -->
+  <div class="card card-geo">
+    <h3 class="fredoka" style="color:#065F46;font-size:20px;margin-bottom:14px;">📏 Infografía: Perímetro y Área</h3>
+    <div style="background:#F0FDF4;border-radius:14px;padding:14px;border:2px solid #A7F3D0;margin-bottom:14px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div style="background:#fff;border-radius:12px;padding:12px;border:2px solid #6EE7B7;text-align:center;">
+          <div class="fredoka" style="color:#065F46;font-size:16px;">Perímetro</div>
+          <div style="font-size:12px;color:#374151;font-weight:700;margin:6px 0;">La suma de todos los lados. Es lo que medís si "caminás alrededor" de la figura.</div>
+          <div style="font-family:'Fredoka One',cursive;color:#059669;font-size:14px;">P = suma de todos los lados</div>
+        </div>
+        <div style="background:#fff;border-radius:12px;padding:12px;border:2px solid #6EE7B7;text-align:center;">
+          <div class="fredoka" style="color:#065F46;font-size:16px;">Área</div>
+          <div style="font-size:12px;color:#374151;font-weight:700;margin:6px 0;">La superficie interior de la figura. Es lo que medís si "pintás el interior".</div>
+          <div style="font-family:'Fredoka One',cursive;color:#059669;font-size:14px;">A = depende de la figura</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;">
+      <div style="border-radius:14px;padding:14px;background:#EFF6FF;border:2px solid #93C5FD;">
+        <div style="text-align:center;margin-bottom:8px;"><svg width="60" height="50" viewBox="0 0 60 50"><rect x="5" y="5" width="50" height="40" fill="#DBEAFE" stroke="#3B82F6" stroke-width="2"/><text x="12" y="30" font-size="9" fill="#3B82F6" font-weight="bold">base</text><text x="47" y="28" font-size="9" fill="#3B82F6" font-weight="bold" transform="rotate(90,47,28)">alt</text></svg></div>
+        <div class="fredoka" style="color:#1E40AF;font-size:14px;text-align:center;">Rectángulo</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;margin-top:6px;">P = 2 × (b + a)<br>A = base × altura</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#F5F3FF;border:2px solid #A78BFA;">
+        <div style="text-align:center;margin-bottom:8px;"><svg width="60" height="50" viewBox="0 0 60 50"><rect x="10" y="5" width="40" height="40" fill="#EDE9FE" stroke="#7C3AED" stroke-width="2"/></svg></div>
+        <div class="fredoka" style="color:#5B21B6;font-size:14px;text-align:center;">Cuadrado</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;margin-top:6px;">P = 4 × lado<br>A = lado²</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#D1FAE5;border:2px solid #6EE7B7;">
+        <div style="text-align:center;margin-bottom:8px;"><svg width="60" height="50" viewBox="0 0 60 50"><polygon points="30,4 56,46 4,46" fill="#A7F3D0" stroke="#059669" stroke-width="2"/><line x1="30" y1="4" x2="30" y2="46" stroke="#059669" stroke-width="1.5" stroke-dasharray="3"/></svg></div>
+        <div class="fredoka" style="color:#065F46;font-size:14px;text-align:center;">Triángulo</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;margin-top:6px;">P = a + b + c<br>A = (base × altura) / 2</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#FEF3C7;border:2px solid #FDE68A;">
+        <div style="text-align:center;margin-bottom:8px;"><svg width="60" height="50" viewBox="0 0 60 50"><circle cx="30" cy="25" r="22" fill="#FDE68A" stroke="#D97706" stroke-width="2"/><line x1="30" y1="25" x2="52" y2="25" stroke="#D97706" stroke-width="1.5"/><text x="36" y="22" font-size="9" fill="#D97706" font-weight="bold">r</text></svg></div>
+        <div class="fredoka" style="color:#92400E;font-size:14px;text-align:center;">Círculo</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;margin-top:6px;">Circunferencia = 2πr<br>A = π × r²</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ 9: Perímetro y Área -->
+  <div class="card card-geo">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:26px;">📏</span>
+      <div>
+        <h3 class="fredoka" style="color:#065F46;font-size:19px;">Quiz 9: Perímetro y Área — Casos Reales</h3>
+        <div style="display:flex;gap:5px;margin-top:3px;"><span class="badge b5">5°</span><span class="badge b6">6°</span></div>
+      </div>
+    </div>
+    <div id="q-geo2"></div>
+  </div>
+
+  <!-- INFOGRAFÍA: Cuerpos geométricos -->
+  <div class="card card-geo">
+    <h3 class="fredoka" style="color:#065F46;font-size:20px;margin-bottom:14px;">🧊 Infografía: Cuerpos Geométricos (3D)</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px;">
+      <div style="border-radius:14px;padding:14px;background:#EFF6FF;border:2px solid #93C5FD;text-align:center;">
+        <div style="font-size:36px;margin-bottom:6px;">🧊</div>
+        <div class="fredoka" style="color:#1E40AF;font-size:14px;">Cubo</div>
+        <div style="font-size:11px;color:#374151;font-weight:700;margin-top:4px;line-height:1.5;">6 caras cuadradas<br>12 aristas iguales<br>8 vértices</div>
+        <div style="font-size:11px;color:#3B82F6;font-weight:800;margin-top:4px;">V = lado³</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#D1FAE5;border:2px solid #6EE7B7;text-align:center;">
+        <div style="font-size:36px;margin-bottom:6px;">📦</div>
+        <div class="fredoka" style="color:#065F46;font-size:14px;">Prisma Rectangular</div>
+        <div style="font-size:11px;color:#374151;font-weight:700;margin-top:4px;line-height:1.5;">6 caras rectangulares<br>12 aristas<br>8 vértices</div>
+        <div style="font-size:11px;color:#059669;font-weight:800;margin-top:4px;">V = l × a × h</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#FEF3C7;border:2px solid #FDE68A;text-align:center;">
+        <div style="font-size:36px;margin-bottom:6px;">⛺</div>
+        <div class="fredoka" style="color:#92400E;font-size:14px;">Pirámide</div>
+        <div style="font-size:11px;color:#374151;font-weight:700;margin-top:4px;line-height:1.5;">Base poligonal<br>Caras triangulares<br>Un vértice superior</div>
+        <div style="font-size:11px;color:#D97706;font-weight:800;margin-top:4px;">V = (B × h) / 3</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#EDE9FE;border:2px solid #A78BFA;text-align:center;">
+        <div style="font-size:36px;margin-bottom:6px;">🥫</div>
+        <div class="fredoka" style="color:#5B21B6;font-size:14px;">Cilindro</div>
+        <div style="font-size:11px;color:#374151;font-weight:700;margin-top:4px;line-height:1.5;">2 bases circulares<br>Cara lateral curva<br>Sin vértices</div>
+        <div style="font-size:11px;color:#7C3AED;font-weight:800;margin-top:4px;">V = π × r² × h</div>
+      </div>
+    </div>
+    <div class="tip-box">💡 <strong>Fórmula de Euler para poliedros:</strong> Caras + Vértices − Aristas = 2. Por ejemplo, el cubo: 6 + 8 − 12 = 2. ✅</div>
+  </div>
+
+  <!-- QUIZ 10: Cuerpos 3D -->
+  <div class="card card-geo">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:26px;">🧊</span>
+      <div>
+        <h3 class="fredoka" style="color:#065F46;font-size:19px;">Quiz 10: Cuerpos Geométricos y Volumen</h3>
+        <span class="badge b6">6° grado</span>
+      </div>
+    </div>
+    <div id="q-geo3"></div>
+  </div>
+
+  <!-- QUIZ 11: Completar geometría -->
+  <div class="card card-geo">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:26px;">✏️</span>
+      <h3 class="fredoka" style="color:#065F46;font-size:19px;">Quiz 11: Calculá — Geometría</h3>
+    </div>
+    <div id="q-geo4"></div>
+  </div>
+
+  <div style="text-align:center;margin-top:10px;">
+    <button class="btn-primary" onclick="go('len-gram')">Ir a Gramática →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ LENGUA: GRAMÁTICA ═══════════════════════════ -->
+<div id="panel-len-gram" class="panel">
+  <div class="sec-header sec-len">
+    <div style="font-size:40px;">🔤</div>
+    <h2 class="fredoka" style="color:#4C1D95;font-size:28px;margin:8px 0 4px;">Lengua — Gramática y Ortografía</h2>
+    <p style="color:#7C3AED;font-weight:700;margin:0;font-size:14px;">4°, 5° y 6° Grado</p>
+  </div>
+
+  <!-- INFOGRAFÍA: Clases de palabras completa -->
+  <div class="card card-len">
+    <h3 class="fredoka" style="color:#4C1D95;font-size:20px;margin-bottom:14px;">🏷️ Infografía: Clases de Palabras</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;">
+      <div style="border-radius:14px;padding:14px;background:#EDE9FE;border:2px solid #A78BFA;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span style="font-size:20px;">🏷️</span><div class="fredoka" style="color:#5B21B6;font-size:15px;">Sustantivo</div></div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.6;margin-bottom:8px;">Nombra personas, animales, objetos, lugares o ideas.</div>
+        <div style="font-size:11px;font-weight:800;color:#7C3AED;margin-bottom:4px;">Clases:</div>
+        <div style="font-size:11px;color:#374151;font-weight:700;line-height:1.7;">• Propio: nombres únicos (Ana, Córdoba)<br>• Común: general (perro, ciudad)<br>• Concreto: se puede tocar (mesa)<br>• Abstracto: idea/sentimiento (amor)</div>
+        <div style="background:#fff;border-radius:10px;padding:6px;margin-top:8px;font-size:12px;color:#6B7280;font-weight:700;">Ejemplos: <span style="color:#7C3AED;">maestra, amistad, Belgrano</span></div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#DBEAFE;border:2px solid #93C5FD;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span style="font-size:20px;">🎨</span><div class="fredoka" style="color:#1E40AF;font-size:15px;">Adjetivo</div></div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.6;margin-bottom:8px;">Describe o califica al sustantivo. Concuerda en género y número.</div>
+        <div style="font-size:11px;font-weight:800;color:#2563EB;margin-bottom:4px;">Clases:</div>
+        <div style="font-size:11px;color:#374151;font-weight:700;line-height:1.7;">• Calificativo: indica cualidad (bonito)<br>• Gentilicio: indica origen (cordobés)<br>• Numeral: indica cantidad (tres, tercero)</div>
+        <div style="background:#fff;border-radius:10px;padding:6px;margin-top:8px;font-size:12px;color:#6B7280;font-weight:700;">Ejemplos: <span style="color:#2563EB;">grande, alegre, primero</span></div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#D1FAE5;border:2px solid #6EE7B7;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span style="font-size:20px;">⚡</span><div class="fredoka" style="color:#065F46;font-size:15px;">Verbo</div></div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.6;margin-bottom:8px;">Expresa acciones, estados o procesos. Es el núcleo del predicado.</div>
+        <div style="font-size:11px;font-weight:800;color:#059669;margin-bottom:4px;">Conjugación:</div>
+        <div style="font-size:11px;color:#374151;font-weight:700;line-height:1.7;">• Persona: yo, vos, él/ella...<br>• Número: singular / plural<br>• Tiempo: presente, pasado, futuro</div>
+        <div style="background:#fff;border-radius:10px;padding:6px;margin-top:8px;font-size:12px;color:#6B7280;font-weight:700;">Ejemplos: <span style="color:#059669;">corre, comió, viajará</span></div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#FEF3C7;border:2px solid #FDE68A;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><span style="font-size:20px;">📍</span><div class="fredoka" style="color:#92400E;font-size:15px;">Otras clases</div></div>
+        <div style="font-size:11px;color:#374151;font-weight:700;line-height:1.8;">• <strong>Artículo:</strong> el, la, los, las, un, una<br>• <strong>Pronombre:</strong> yo, vos, él, ella, me, te<br>• <strong>Preposición:</strong> a, de, en, con, por, para<br>• <strong>Conjunción:</strong> y, o, pero, porque, aunque<br>• <strong>Adverbio:</strong> aquí, ayer, rápido, nunca</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ 12: Clases de palabras -->
+  <div class="card card-len">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:26px;">🏷️</span>
+      <div>
+        <h3 class="fredoka" style="color:#4C1D95;font-size:19px;">Quiz 12: Clases de Palabras</h3>
+        <div style="display:flex;gap:5px;margin-top:3px;"><span class="badge b4">4°</span><span class="badge b5">5°</span></div>
+      </div>
+    </div>
+    <div id="q-gram1"></div>
+  </div>
+
+  <!-- INFOGRAFÍA: Tiempos verbales completo -->
+  <div class="card card-len">
+    <h3 class="fredoka" style="color:#4C1D95;font-size:20px;margin-bottom:14px;">🕐 Infografía: Tiempos Verbales</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:14px;">
+      <div style="border-radius:14px;padding:14px;background:#EDE9FE;border:2px solid #A78BFA;">
+        <div style="text-align:center;font-size:28px;margin-bottom:8px;">⬅️</div>
+        <div class="fredoka" style="color:#5B21B6;font-size:15px;text-align:center;margin-bottom:8px;">PASADO (Pretérito)</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.7;">• <strong>Perfecto simple:</strong> Ella <em>corrió</em><br>• <strong>Imperfecto:</strong> Ella <em>corría</em><br>• <strong>Pluscuamperfecto:</strong> Ella <em>había corrido</em><br>• <strong>Perfecto compuesto:</strong> Ella <em>ha corrido</em></div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#D1FAE5;border:2px solid #6EE7B7;">
+        <div style="text-align:center;font-size:28px;margin-bottom:8px;">🔴</div>
+        <div class="fredoka" style="color:#065F46;font-size:15px;text-align:center;margin-bottom:8px;">PRESENTE</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.7;">• Ella <em>corre</em> todos los días.<br><br>Expresa acciones que ocurren ahora o son habituales.</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#FEF3C7;border:2px solid #FDE68A;">
+        <div style="text-align:center;font-size:28px;margin-bottom:8px;">➡️</div>
+        <div class="fredoka" style="color:#92400E;font-size:15px;text-align:center;margin-bottom:8px;">FUTURO</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.7;">• <strong>Simple:</strong> Ella <em>correrá</em><br>• <strong>Perifrástico:</strong> Ella <em>va a correr</em><br><br>Expresa acciones que ocurrirán.</div>
+      </div>
+    </div>
+    <div style="background:#F9FAFB;border-radius:14px;padding:14px;border:2px solid #E5E7EB;">
+      <div class="fredoka" style="color:#374151;font-size:14px;margin-bottom:10px;">Conjugación completa de CORRER (3a conjugación):</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center;font-size:12px;">
+        <div style="background:#EDE9FE;border-radius:10px;padding:8px;"><div style="font-weight:800;color:#5B21B6;margin-bottom:4px;">Presente</div><div style="color:#374151;font-weight:700;line-height:1.8;">yo corro<br>vos corrés<br>él corre<br>nosotros corremos</div></div>
+        <div style="background:#D1FAE5;border-radius:10px;padding:8px;"><div style="font-weight:800;color:#065F46;margin-bottom:4px;">Pasado (perfecto)</div><div style="color:#374151;font-weight:700;line-height:1.8;">yo corrí<br>vos corriste<br>él corrió<br>nosotros corrimos</div></div>
+        <div style="background:#FEF3C7;border-radius:10px;padding:8px;"><div style="font-weight:800;color:#92400E;margin-bottom:4px;">Futuro</div><div style="color:#374151;font-weight:700;line-height:1.8;">yo correré<br>vos correrás<br>él correrá<br>nosotros correremos</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ 13: Tiempos verbales -->
+  <div class="card card-len">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:26px;">🕐</span>
+      <div>
+        <h3 class="fredoka" style="color:#4C1D95;font-size:19px;">Quiz 13: Tiempos Verbales</h3>
+        <span class="badge bl">5° grado</span>
+      </div>
+    </div>
+    <div id="q-gram2"></div>
+  </div>
+
+  <!-- INFOGRAFÍA: Sujeto y predicado -->
+  <div class="card card-len">
+    <h3 class="fredoka" style="color:#4C1D95;font-size:20px;margin-bottom:14px;">🔍 Infografía: Análisis Sintáctico</h3>
+    <div style="background:#F0F9FF;border-radius:14px;padding:16px;border:2px solid #BAE6FD;margin-bottom:14px;">
+      <div style="font-size:18px;font-weight:800;text-align:center;margin-bottom:12px;color:#374151;">
+        <span style="background:#DBEAFE;color:#1E40AF;padding:4px 12px;border-radius:10px;margin-right:6px;">Las chicas alegres</span>
+        <span style="background:#D1FAE5;color:#065F46;padding:4px 12px;border-radius:10px;">corrieron por el parque</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div style="background:#DBEAFE;border-radius:12px;padding:12px;border:2px solid #93C5FD;">
+          <div class="fredoka" style="color:#1E40AF;font-size:15px;margin-bottom:8px;">SUJETO</div>
+          <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.7;margin-bottom:8px;">¿Quién realiza la acción? → <em>Las chicas alegres</em></div>
+          <div style="font-size:11px;color:#2563EB;font-weight:800;">Núcleo del sujeto (NS) = chicas (sustantivo)<br>Modificadores: Las (artículo) + alegres (adjetivo)</div>
+        </div>
+        <div style="background:#D1FAE5;border-radius:12px;padding:12px;border:2px solid #6EE7B7;">
+          <div class="fredoka" style="color:#065F46;font-size:15px;margin-bottom:8px;">PREDICADO</div>
+          <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.7;margin-bottom:8px;">¿Qué hace? → <em>corrieron por el parque</em></div>
+          <div style="font-size:11px;color:#059669;font-weight:800;">Núcleo del predicado (NP) = corrieron (verbo)<br>Complementos: por el parque</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div style="background:#FEF3C7;border-radius:12px;padding:12px;border:2px solid #FDE68A;">
+        <div class="fredoka" style="color:#92400E;font-size:14px;margin-bottom:6px;">Sujeto tácito</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.5;">"Corrió mucho" → el sujeto no aparece pero se puede identificar: (Él/Ella) corrió mucho.</div>
+      </div>
+      <div style="background:#EDE9FE;border-radius:12px;padding:12px;border:2px solid #A78BFA;">
+        <div class="fredoka" style="color:#5B21B6;font-size:14px;margin-bottom:6px;">Concordancia</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.5;">Sujeto y verbo deben concordar en número: <em>El perro ladra</em> / <em>Los perros ladran</em>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ 14: Sintaxis -->
+  <div class="card card-len">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:26px;">🔍</span>
+      <div>
+        <h3 class="fredoka" style="color:#4C1D95;font-size:19px;">Quiz 14: Sujeto y Predicado</h3>
+        <span class="badge bl">6° grado</span>
+      </div>
+    </div>
+    <div id="q-gram3"></div>
+  </div>
+
+  <!-- INFOGRAFÍA: Ortografía completa -->
+  <div class="card card-len">
+    <h3 class="fredoka" style="color:#4C1D95;font-size:20px;margin-bottom:14px;">✍️ Infografía: Ortografía — Reglas Esenciales</h3>
+
+    <!-- Tilde -->
+    <div style="background:#F0F9FF;border-radius:14px;padding:14px;border:2px solid #BAE6FD;margin-bottom:12px;">
+      <div class="fredoka" style="color:#0C4A6E;font-size:15px;margin-bottom:10px;">La Tilde y la Acentuación:</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;">
+        <div style="background:#fff;border-radius:10px;padding:10px;border:1.5px solid #BAE6FD;text-align:center;">
+          <div class="fredoka" style="color:#0369A1;font-size:13px;">Aguda</div>
+          <div style="font-size:11px;color:#374151;font-weight:700;margin-top:4px;line-height:1.6;">Golpe en la <strong>última</strong> sílaba.<br>Tilde si termina en:<br>n, s o vocal.<br><em>ca-mión, ma-má, co-més</em></div>
+        </div>
+        <div style="background:#fff;border-radius:10px;padding:10px;border:1.5px solid #BAE6FD;text-align:center;">
+          <div class="fredoka" style="color:#0369A1;font-size:13px;">Grave (llana)</div>
+          <div style="font-size:11px;color:#374151;font-weight:700;margin-top:4px;line-height:1.6;">Golpe en la <strong>penúltima</strong> sílaba.<br>Tilde si NO termina en:<br>n, s o vocal.<br><em>ár-bol, fá-cil, lá-piz</em></div>
+        </div>
+        <div style="background:#fff;border-radius:10px;padding:10px;border:1.5px solid #BAE6FD;text-align:center;">
+          <div class="fredoka" style="color:#0369A1;font-size:13px;">Esdrújula</div>
+          <div style="font-size:11px;color:#374151;font-weight:700;margin-top:4px;line-height:1.6;">Golpe en la <strong>antepenúltima</strong>.<br>SIEMPRE llevan tilde.<br><em>mú-si-ca, sí-la-ba,<br>má-gi-co</em></div>
+        </div>
+        <div style="background:#fff;border-radius:10px;padding:10px;border:1.5px solid #BAE6FD;text-align:center;">
+          <div class="fredoka" style="color:#0369A1;font-size:13px;">Tilde diacrítica</div>
+          <div style="font-size:11px;color:#374151;font-weight:700;margin-top:4px;line-height:1.6;">Diferencia dos palabras que se escriben igual.<br><em>el (artículo) / él (pronombre)<br>tu (posesivo) / tú (pronombre)</em></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Uso de B/V, G/J, LL/Y -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;">
+      <div style="background:#EDE9FE;border-radius:12px;padding:12px;border:2px solid #A78BFA;">
+        <div class="fredoka" style="color:#5B21B6;font-size:14px;margin-bottom:6px;">B / V</div>
+        <div style="font-size:11px;color:#374151;font-weight:700;line-height:1.7;">Se escribe con <strong>B</strong>: verbos terminados en -bir, -buir. Palabras con bl, br.<br><em>escribir, recibir, blanco, brazo</em><br><br>Se escribe con <strong>V</strong>: después de n, d. Verbos "ir", "andar", "estar" en pasado.<br><em>enviar, advertir, iba, anduve</em></div>
+      </div>
+      <div style="background:#FCE7F3;border-radius:12px;padding:12px;border:2px solid #F9A8D4;">
+        <div class="fredoka" style="color:#831843;font-size:14px;margin-bottom:6px;">G / J</div>
+        <div style="font-size:11px;color:#374151;font-weight:700;line-height:1.7;">Se escribe con <strong>G</strong>: antes de e/i en palabras con -gen, -ger, -gir.<br><em>genio, coger, dirigir, imagen</em><br><br>Se escribe con <strong>J</strong>: palabras con -aje, -eje, -jero.<br><em>viaje, ejercicio, extranjero</em></div>
+      </div>
+      <div style="background:#FEF3C7;border-radius:12px;padding:12px;border:2px solid #FDE68A;">
+        <div class="fredoka" style="color:#92400E;font-size:14px;margin-bottom:6px;">Signos de puntuación</div>
+        <div style="font-size:11px;color:#374151;font-weight:700;line-height:1.8;"><strong>.</strong> Punto: termina oración o párrafo<br><strong>,</strong> Coma: pausa breve, lista, aclaración<br><strong>;</strong> Punto y coma: pausa media<br><strong>:</strong> Dos puntos: antes de lista o cita<br><strong>¿?</strong> Interrogación: preguntas<br><strong>¡!</strong> Exclamación: sorpresa/emoción</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ 15: Ortografía -->
+  <div class="card card-len">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:26px;">✍️</span>
+      <div>
+        <h3 class="fredoka" style="color:#4C1D95;font-size:19px;">Quiz 15: Ortografía y Puntuación</h3>
+        <div style="display:flex;gap:5px;margin-top:3px;"><span class="badge b4">4°</span><span class="badge b5">5°</span><span class="badge bl">6°</span></div>
+      </div>
+    </div>
+    <div id="q-gram4"></div>
+  </div>
+
+  <!-- QUIZ 16: Completar oraciones -->
+  <div class="card card-len">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:26px;">🖊️</span>
+      <h3 class="fredoka" style="color:#4C1D95;font-size:19px;">Quiz 16: Completar con la clase de palabra correcta</h3>
+    </div>
+    <div id="q-gram5"></div>
+  </div>
+
+  <!-- MATCHING: Tilde diacrítica -->
+  <div class="card card-len">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:26px;">🔗</span>
+      <div>
+        <h3 class="fredoka" style="color:#4C1D95;font-size:19px;">Quiz 17: Relacionar — Tilde Diacrítica</h3>
+        <span class="badge bl">6° grado</span>
+      </div>
+    </div>
+    <p style="font-size:13px;color:#6B7280;font-weight:600;margin-bottom:12px;">Hacé click en la palabra de la izquierda y luego en su función de la derecha.</p>
+    <div id="match-tilde"></div>
+  </div>
+
+  <div style="text-align:center;margin-top:10px;">
+    <button class="btn-primary" onclick="go('len-texto')">Ir a Tipos de Texto →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ LENGUA: TEXTOS ═══════════════════════════ -->
+<div id="panel-len-texto" class="panel">
+  <div class="sec-header sec-len">
+    <div style="font-size:40px;">📚</div>
+    <h2 class="fredoka" style="color:#4C1D95;font-size:28px;margin:8px 0 4px;">Lengua — Comprensión y Tipos de Texto</h2>
+    <p style="color:#7C3AED;font-weight:700;margin:0;font-size:14px;">4°, 5° y 6° Grado</p>
+  </div>
+
+  <!-- INFOGRAFÍA: Tipos de texto completa -->
+  <div class="card card-len">
+    <h3 class="fredoka" style="color:#4C1D95;font-size:20px;margin-bottom:14px;">📄 Infografía: Los Tipos de Texto</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;">
+      <div style="border-radius:14px;padding:14px;background:#EDE9FE;border:2px solid #A78BFA;">
+        <div style="font-size:24px;text-align:center;margin-bottom:6px;">📖</div>
+        <div class="fredoka" style="color:#5B21B6;font-size:14px;margin-bottom:6px;text-align:center;">Narrativo</div>
+        <div style="font-size:11px;color:#374151;font-weight:700;line-height:1.6;">Cuenta una historia.<br><strong>Elementos:</strong> narrador, personajes, tiempo, lugar y trama.<br><strong>Tipos:</strong> cuento, novela, leyenda, fábula, mito.</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#DBEAFE;border:2px solid #93C5FD;">
+        <div style="font-size:24px;text-align:center;margin-bottom:6px;">📰</div>
+        <div class="fredoka" style="color:#1E40AF;font-size:14px;margin-bottom:6px;text-align:center;">Informativo</div>
+        <div style="font-size:11px;color:#374151;font-weight:700;line-height:1.6;">Informa sobre hechos reales.<br><strong>¿Qué? ¿Quién? ¿Dónde? ¿Cuándo?</strong><br><strong>Tipos:</strong> noticia, crónica, artículo de divulgación, enciclopedia.</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#FCE7F3;border:2px solid #F9A8D4;">
+        <div style="font-size:24px;text-align:center;margin-bottom:6px;">🎭</div>
+        <div class="fredoka" style="color:#831843;font-size:14px;margin-bottom:6px;text-align:center;">Argumentativo</div>
+        <div style="font-size:11px;color:#374151;font-weight:700;line-height:1.6;">Convence al lector con argumentos.<br><strong>Estructura:</strong> tesis + argumentos + conclusión.<br><strong>Tipos:</strong> texto de opinión, editorial, debate.</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#D1FAE5;border:2px solid #6EE7B7;">
+        <div style="font-size:24px;text-align:center;margin-bottom:6px;">📋</div>
+        <div class="fredoka" style="color:#065F46;font-size:14px;margin-bottom:6px;text-align:center;">Instructivo</div>
+        <div style="font-size:11px;color:#374151;font-weight:700;line-height:1.6;">Da instrucciones o pasos para hacer algo.<br><strong>Características:</strong> verbos imperativos, orden, numeración.<br><strong>Tipos:</strong> receta, manual, reglamento.</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#FEF3C7;border:2px solid #FDE68A;">
+        <div style="font-size:24px;text-align:center;margin-bottom:6px;">🎵</div>
+        <div class="fredoka" style="color:#92400E;font-size:14px;margin-bottom:6px;text-align:center;">Poético</div>
+        <div style="font-size:11px;color:#374151;font-weight:700;line-height:1.6;">Expresa sentimientos y emociones con recursos literarios.<br><strong>Recursos:</strong> rima, ritmo, metáfora, comparación.<br><strong>Tipos:</strong> poema, soneto, haiku.</div>
+      </div>
+      <div style="border-radius:14px;padding:14px;background:#F0FDF4;border:2px solid #A7F3D0;">
+        <div style="font-size:24px;text-align:center;margin-bottom:6px;">✉️</div>
+        <div class="fredoka" style="color:#065F46;font-size:14px;margin-bottom:6px;text-align:center;">Epistolar</div>
+        <div style="font-size:11px;color:#374151;font-weight:700;line-height:1.6;">Comunicación escrita entre personas.<br><strong>Partes:</strong> encabezado, lugar y fecha, saludo, desarrollo, despedida, firma.<br><strong>Tipos:</strong> carta, correo electrónico.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ 18: Tipos de texto -->
+  <div class="card card-len">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:26px;">📄</span>
+      <div>
+        <h3 class="fredoka" style="color:#4C1D95;font-size:19px;">Quiz 18: Identificar Tipos de Texto</h3>
+        <div style="display:flex;gap:5px;margin-top:3px;"><span class="badge b4">4°</span><span class="badge b5">5°</span><span class="badge bl">6°</span></div>
+      </div>
+    </div>
+    <div id="q-txt1"></div>
+  </div>
+
+  <!-- CASO: Comprensión lectora -->
+  <div class="card card-len">
+    <h3 class="fredoka" style="color:#4C1D95;font-size:20px;margin-bottom:14px;">📖 Comprensión Lectora — Texto y Preguntas</h3>
+    <div class="caso-box">
+      <div class="caso-title">Leé con atención:</div>
+      <div class="caso-text" style="font-style:italic;line-height:1.9;">
+        La leyenda del Pombero cuenta que en las noches de verano, cuando el calor aprieta y los grillos cantan, aparece una pequeña figura oscura entre los yuyos. Se dice que es travieso y silencioso, y que imita los sonidos del monte para asustar a quienes se adentran en él sin permiso. Los abuelos advierten que si uno lo ve, debe saludarlo con respeto. Quienes lo ignoran, dicen, reciben bromas pesadas: vacas que se escapan, herramientas que desaparecen, niños que se pierden entre los matorrales. Pero quienes lo tratan bien reciben su protección.
+      </div>
+    </div>
+    <div id="q-comprension"></div>
+  </div>
+
+  <!-- INFOGRAFÍA: Conectores y coherencia -->
+  <div class="card card-len">
+    <h3 class="fredoka" style="color:#4C1D95;font-size:20px;margin-bottom:14px;">🔗 Infografía: Conectores — Cohesión Textual</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:14px;">
+      <div style="border-radius:12px;padding:12px;background:#EDE9FE;border:2px solid #A78BFA;">
+        <div class="fredoka" style="color:#5B21B6;font-size:13px;margin-bottom:6px;">Adición (suma)</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.7;"><em>y, e, también, además, asimismo, incluso</em><br><br>"Me gusta la pizza <strong>y</strong> también el sushi."</div>
+      </div>
+      <div style="border-radius:12px;padding:12px;background:#DBEAFE;border:2px solid #93C5FD;">
+        <div class="fredoka" style="color:#1E40AF;font-size:13px;margin-bottom:6px;">Adversativo (contraste)</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.7;"><em>pero, sin embargo, aunque, no obstante, sino</em><br><br>"Estudié mucho, <strong>sin embargo</strong> me equivoqué."</div>
+      </div>
+      <div style="border-radius:12px;padding:12px;background:#D1FAE5;border:2px solid #6EE7B7;">
+        <div class="fredoka" style="color:#065F46;font-size:13px;margin-bottom:6px;">Causal (causa)</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.7;"><em>porque, ya que, puesto que, dado que</em><br><br>"No fui <strong>porque</strong> estaba enferma."</div>
+      </div>
+      <div style="border-radius:12px;padding:12px;background:#FEF3C7;border:2px solid #FDE68A;">
+        <div class="fredoka" style="color:#92400E;font-size:13px;margin-bottom:6px;">Consecutivo (resultado)</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.7;"><em>por lo tanto, entonces, en consecuencia, así que</em><br><br>"Llovió mucho, <strong>por lo tanto</strong> no salimos."</div>
+      </div>
+      <div style="border-radius:12px;padding:12px;background:#FCE7F3;border:2px solid #F9A8D4;">
+        <div class="fredoka" style="color:#831843;font-size:13px;margin-bottom:6px;">Temporal (tiempo)</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.7;"><em>cuando, mientras, antes, después, luego, entonces</em><br><br>"<strong>Después</strong> de comer, hice la tarea."</div>
+      </div>
+      <div style="border-radius:12px;padding:12px;background:#F0FDF4;border:2px solid #A7F3D0;">
+        <div class="fredoka" style="color:#065F46;font-size:13px;margin-bottom:6px;">Ordenadores</div>
+        <div style="font-size:12px;color:#374151;font-weight:700;line-height:1.7;"><em>primero, luego, a continuación, finalmente, en síntesis</em><br><br>"<strong>Primero</strong> mezcló los ingredientes. <strong>Luego</strong> los horneó."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ 19: Conectores -->
+  <div class="card card-len">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:26px;">🔗</span>
+      <div>
+        <h3 class="fredoka" style="color:#4C1D95;font-size:19px;">Quiz 19: Conectores y Coherencia</h3>
+        <span class="badge bl">5° grado</span>
+      </div>
+    </div>
+    <div id="q-txt2"></div>
+  </div>
+
+  <!-- MATCHING: Texto con su estructura -->
+  <div class="card card-len">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:26px;">🔗</span>
+      <h3 class="fredoka" style="color:#4C1D95;font-size:19px;">Quiz 20: Relacionar — Texto con su tipo</h3>
+    </div>
+    <p style="font-size:13px;color:#6B7280;font-weight:600;margin-bottom:12px;">Hacé click en un fragmento de texto de la izquierda y luego en su tipo de la derecha.</p>
+    <div id="match-textos"></div>
+  </div>
+
+  <!-- QUIZ 21: Comprensión y producción -->
+  <div class="card card-len">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+      <span style="font-size:26px;">📝</span>
+      <h3 class="fredoka" style="color:#4C1D95;font-size:19px;">Quiz 21: Completar textos con la palabra correcta</h3>
+    </div>
+    <div id="q-txt3"></div>
+  </div>
+
+  <div style="text-align:center;margin-top:10px;">
+    <button class="btn-primary" onclick="go('repaso')">Ir al Repaso Final →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ REPASO FINAL ═══════════════════════════ -->
+<div id="panel-repaso" class="panel">
+  <div style="text-align:center;padding:28px 0 18px;">
+    <div style="font-size:56px;">🏆</div>
+    <h2 class="fredoka" style="color:#4C1D95;font-size:30px;margin:8px 0 4px;">Gran Repaso Final</h2>
+    <p style="color:#6B7280;font-weight:600;font-size:15px;max-width:480px;margin:0 auto;">Matemática + Lengua juntos. 15 preguntas de todos los módulos.</p>
+  </div>
+  <div class="card" style="background:linear-gradient(135deg,#FFF7ED,#FEF3C7);border-color:#FDE68A;">
+    <div id="repaso-body"></div>
+    <div id="repaso-result" class="hidden" style="text-align:center;padding:24px 0 8px;">
+      <div id="r-medal" style="font-size:52px;"></div>
+      <div id="r-score" class="score-display"></div>
+      <div id="r-msg" class="fredoka" style="font-size:20px;color:#92400E;margin:8px 0 4px;"></div>
+      <div id="r-sub" style="font-size:14px;color:#78350F;font-weight:700;"></div>
+      <div style="margin-top:20px;"><button class="btn-primary" onclick="go('progreso')">Ver mi Progreso →</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ PROGRESO ═══════════════════════════ -->
+<div id="panel-progreso" class="panel">
+  <div style="text-align:center;padding:20px 0 14px;">
+    <div style="font-size:48px;">📊</div>
+    <h2 class="fredoka" style="color:#4C1D95;font-size:28px;margin:8px 0 4px;">Mi Progreso</h2>
+    <p style="color:#6B7280;font-weight:600;font-size:14px;">Seguí tu avance en cada actividad.</p>
+  </div>
+  <div class="card" style="background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border-color:#DDD6FE;text-align:center;">
+    <div class="fredoka" style="color:#4C1D95;font-size:18px;margin-bottom:4px;">Puntaje total acumulado</div>
+    <div class="score-display" id="tot-pts">0</div>
+    <div style="font-size:13px;color:#7C3AED;font-weight:700;margin-top:4px;" id="tot-label">puntos</div>
+    <div id="tot-stars" style="font-size:24px;margin-top:10px;">⭐⭐⭐⭐⭐</div>
+  </div>
+  <div class="card">
+    <h3 class="fredoka" style="color:#4C1D95;font-size:20px;margin-bottom:16px;">Detalle por actividad</h3>
+    <div id="prog-detail"></div>
+  </div>
+  <div class="card" id="rec-card">
+    <h3 class="fredoka" style="color:#4C1D95;font-size:20px;margin-bottom:12px;">💡 Mis recomendaciones</h3>
+    <div id="rec-list"><p style="color:#6B7280;font-size:14px;font-weight:600;">Completá actividades para ver recomendaciones.</p></div>
+  </div>
+  <div style="text-align:center;"><button class="btn-secondary" onclick="if(confirm('¿Reiniciar todo el progreso?'))resetAll()">🔄 Reiniciar todo</button></div>
+</div>
+
+<script>
+// ═══════════ STATE ═══════════
+const S = { scores: {} };
+function save(){ try{localStorage.setItem('ep2',JSON.stringify(S));}catch(e){} }
+function load(){ try{const d=localStorage.getItem('ep2');if(d)Object.assign(S,JSON.parse(d));}catch(e){} }
+
+// ═══════════ NAV ═══════════
+const panels = ['inicio','mat-num','mat-geo','len-gram','len-texto','repaso','progreso'];
+function go(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  const idx=panels.indexOf(id);
+  if(idx>=0) document.querySelectorAll('.nav-btn')[idx]?.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='progreso') renderProg();
+}
+
+// ═══════════ QUIZ MC ═══════════
+function mkMC(cid, qid, qs){
+  const C=document.getElementById(cid); if(!C)return; C.innerHTML='';
+  let ans=0,earn=0,tot=qs.length;
+  qs.forEach((q,qi)=>{
+    const d=document.createElement('div');
+    d.innerHTML=`<div class="q-number">Pregunta ${qi+1} de ${tot}</div><p class="q-text">${q.q}</p>`;
+    const fb=document.createElement('div'); fb.className='feedback hidden';
+    q.opts.forEach((o,oi)=>{
+      const b=document.createElement('button'); b.className='quiz-opt'; b.textContent=o;
+      b.onclick=()=>{
+        if(b.disabled)return;
+        d.querySelectorAll('.quiz-opt').forEach(x=>x.disabled=true);
+        if(oi===q.c){b.classList.add('correct');earn++;fb.className='feedback ok';fb.innerHTML='✅ '+q.e;}
+        else{b.classList.add('wrong');d.querySelectorAll('.quiz-opt')[q.c].classList.add('correct');fb.className='feedback err';fb.innerHTML='❌ '+q.e;}
+        fb.classList.remove('hidden'); ans++;
+        if(ans===tot){S.scores[qid]={earn,tot};save();addBanner(C,earn,tot);}
+      };
+      d.appendChild(b);
+    });
+    d.appendChild(fb); C.appendChild(d);
+    if(qi<tot-1){const hr=document.createElement('div');hr.className='divider-mat';C.appendChild(hr);}
+  });
+}
+
+// ═══════════ QUIZ FILL ═══════════
+function mkFill(cid, qid, qs){
+  const C=document.getElementById(cid); if(!C)return; C.innerHTML='';
+  let ans=0,earn=0,tot=qs.length;
+  qs.forEach((q,qi)=>{
+    const d=document.createElement('div');
+    d.innerHTML=`<div class="q-number">Pregunta ${qi+1} de ${tot}</div><p class="q-text">${q.q}</p>`;
+    const row=document.createElement('div'); row.style.cssText='display:flex;gap:8px;align-items:center;flex-wrap:wrap;';
+    const inp=document.createElement('input'); inp.type='text'; inp.className='quiz-input'; inp.style.maxWidth='220px'; inp.placeholder='Tu respuesta...';
+    const btn=document.createElement('button'); btn.className='btn-check'; btn.textContent='Verificar ✓';
+    const fb=document.createElement('div'); fb.className='feedback hidden';
+    btn.onclick=()=>{
+      if(btn.disabled)return;
+      const v=inp.value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+      const cs=Array.isArray(q.a)?q.a:[q.a];
+      const ok=cs.some(c=>c.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')==v);
+      inp.disabled=true; btn.disabled=true;
+      if(ok){inp.classList.add('correct');fb.className='feedback ok';fb.innerHTML='✅ '+q.e;earn++;}
+      else{inp.classList.add('wrong');fb.className='feedback err';fb.innerHTML='❌ Respuesta correcta: <strong>'+(Array.isArray(q.a)?q.a[0]:q.a)+'</strong>. '+q.e;}
+      fb.classList.remove('hidden'); ans++;
+      if(ans===tot){S.scores[qid]={earn,tot};save();addBanner(C,earn,tot);}
+    };
+    inp.addEventListener('keydown',e=>{if(e.key==='Enter')btn.click();});
+    row.appendChild(inp); row.appendChild(btn); d.appendChild(row); d.appendChild(fb); C.appendChild(d);
+    if(qi<tot-1){const hr=document.createElement('div');hr.className='divider-len';C.appendChild(hr);}
+  });
+}
+
+// ═══════════ MATCHING ═══════════
+function mkMatch(cid, qid, pairs){
+  const C=document.getElementById(cid); if(!C)return; C.innerHTML='';
+  const rights=[...pairs.map(p=>p.r)].sort(()=>Math.random()-.5);
+  let selL=null,selPair=null,matched=0;
+  const grid=document.createElement('div'); grid.style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:10px;';
+  const lc=document.createElement('div'); lc.className='match-col'; lc.innerHTML='<div style="font-size:11px;font-weight:700;color:#9CA3AF;text-align:center;margin-bottom:4px;">IZQUIERDA</div>';
+  const rc=document.createElement('div'); rc.className='match-col'; rc.innerHTML='<div style="font-size:11px;font-weight:700;color:#9CA3AF;text-align:center;margin-bottom:4px;">DERECHA</div>';
+  const fb=document.createElement('div'); fb.className='feedback hidden';
+  pairs.forEach((pair,i)=>{
+    const lb=document.createElement('div'); lb.className='match-item'; lb.textContent=pair.l;
+    lb.onclick=()=>{
+      if(lb.classList.contains('matched'))return;
+      lc.querySelectorAll('.match-item').forEach(x=>{if(!x.classList.contains('matched'))x.classList.remove('sel-l');});
+      lb.classList.add('sel-l'); selL=lb; selPair=pair;
+    };
+    lc.appendChild(lb);
+  });
+  rights.forEach(r=>{
+    const rb=document.createElement('div'); rb.className='match-item'; rb.textContent=r;
+    rb.onclick=()=>{
+      if(rb.classList.contains('matched')||!selL)return;
+      if(r===selPair.r){
+        selL.classList.remove('sel-l'); selL.classList.add('matched'); rb.classList.add('matched');
+        matched++; fb.className='feedback ok'; fb.textContent='✅ ¡Correcto! '+selPair.l+' → '+r; fb.classList.remove('hidden');
+        selL=null; selPair=null;
+        if(matched===pairs.length){S.scores[qid]={earn:pairs.length,tot:pairs.length};save();fb.textContent='🌟 ¡Completaste el ejercicio de relacionar!';}
+      } else {
+        rb.classList.add('bad'); setTimeout(()=>rb.classList.remove('bad'),350);
+        fb.className='feedback err'; fb.textContent='❌ Ese no es el par. Intentá de nuevo.'; fb.classList.remove('hidden');
+      }
+    };
+    rc.appendChild(rb);
+  });
+  grid.appendChild(lc); grid.appendChild(rc); C.appendChild(grid); C.appendChild(fb);
+}
+
+// ═══════════ SCORE BANNER ═══════════
+function addBanner(C,earn,tot){
+  const pct=Math.round(earn/tot*100);
+  const emoji=pct>=80?'🌟':pct>=60?'👍':'💪';
+  const msg=pct>=80?'¡Excelente!':pct>=60?'¡Muy bien! Seguí así.':'¡Podés mejorar! Repasá el tema.';
+  const b=document.createElement('div');
+  b.style.cssText='text-align:center;margin-top:20px;padding:18px;background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border-radius:16px;border:2px solid #DDD6FE;';
+  b.innerHTML=`<div style="font-size:36px;">${emoji}</div><div style="font-family:'Fredoka One',cursive;font-size:22px;color:#4C1D95;margin:4px 0;">${earn}/${tot} correctas</div><div style="font-size:14px;color:#7C3AED;font-weight:700;">${msg}</div>`;
+  C.appendChild(b);
+}
+
+// ═══════════ REPASO FINAL ═══════════
+const repasoQs = [
+  {q:'¿Cuánto es el 30% de 500?',opts:['15','50','150','300'],c:2,e:'30% de 500 = 500 × 0,30 = 150.'},
+  {q:'Un rectángulo de base 9 cm y altura 6 cm. ¿Cuál es su área?',opts:['30 cm²','54 cm²','45 cm²','27 cm²'],c:1,e:'Área = base × altura = 9 × 6 = 54 cm².'},
+  {q:'¿Cuál de estas palabras es un VERBO en tiempo pasado?',opts:['corriendo','correrá','corrió','corre'],c:2,e:'"Corrió" está en pretérito perfecto simple (pasado).'},
+  {q:'¿Cuánto es 2⁴ (2 elevado a la cuarta potencia)?',opts:['8','16','32','6'],c:1,e:'2⁴ = 2 × 2 × 2 × 2 = 16.'},
+  {q:'La oración "Las flores rojas crecen en el jardín." — el SUJETO es:',opts:['crecen en el jardín','Las flores rojas','el jardín','rojas'],c:1,e:'El sujeto es "Las flores rojas" (¿quién crece?).'},
+  {q:'¿Cuál es el MCM de 6 y 9?',opts:['3','18','54','6'],c:1,e:'Múltiplos de 6: 6,12,18... Múltiplos de 9: 9,18... MCM = 18.'},
+  {q:'"Aunque estudié mucho, no aprobé el examen." El conector AUNQUE expresa:',opts:['Causa','Adición','Concesión/Contraste','Consecuencia'],c:2,e:'"Aunque" introduce una concesión: algo sucede a pesar de otra cosa.'},
+  {q:'¿Qué tipo de triángulo tiene los 3 lados diferentes?',opts:['Equilátero','Isósceles','Escaleno','Rectángulo'],c:2,e:'El triángulo escaleno tiene todos sus lados y ángulos distintos.'},
+  {q:'¿Cuál de estas palabras lleva tilde?',opts:['examen','lapiz','camion','musica'],c:3,e:'"Música" es esdrújula (MÚ-si-ca) y siempre llevan tilde.'},
+  {q:'Si 5 cuadernos cuestan $250, ¿cuánto cuestan 8 cuadernos?',opts:['$400','$350','$500','$300'],c:0,e:'Es proporcionalidad directa. 1 cuaderno = $50. 8 × $50 = $400.'},
+  {q:'¿Cuál de estos es un texto ARGUMENTATIVO?',opts:['Una receta de cocina','Un texto de opinión sobre el medio ambiente','La leyenda del Pombero','Un cuento de terror'],c:1,e:'El texto de opinión argumenta a favor o en contra de algo con razones.'},
+  {q:'¿Cuánto es √144?',opts:['12','14','11','13'],c:0,e:'√144 = 12, porque 12 × 12 = 144.'},
+  {q:'La palabra "árbol" es grave porque:',opts:['Termina en vocal','El golpe va en la penúltima y no termina en n, s, vocal','Es esdrújula','Siempre llevan tilde'],c:1,e:'ÁR-bol: golpe en penúltima sílaba (grave), termina en L → lleva tilde.'},
+  {q:'Un cubo tiene aristas de 4 cm. ¿Cuál es su volumen?',opts:['16 cm³','64 cm³','48 cm³','32 cm³'],c:1,e:'Volumen del cubo = lado³ = 4³ = 4 × 4 × 4 = 64 cm³.'},
+  {q:'En "El perro duerme", el NÚCLEO DEL PREDICADO es:',opts:['El','perro','duerme','El perro'],c:2,e:'El núcleo del predicado siempre es el verbo: "duerme".'},
+];
+
+function buildRepaso(){
+  const C=document.getElementById('repaso-body'); if(!C)return; C.innerHTML='';
+  let ans=0,earn=0,tot=repasoQs.length;
+  repasoQs.forEach((q,qi)=>{
+    const d=document.createElement('div');
+    d.innerHTML=`<div style="font-size:11px;color:#D97706;font-weight:700;margin-bottom:4px;">Pregunta ${qi+1} de ${tot}</div><p class="q-text">${q.q}</p>`;
+    const fb=document.createElement('div'); fb.className='feedback hidden';
+    q.opts.forEach((o,oi)=>{
+      const b=document.createElement('button'); b.className='quiz-opt'; b.textContent=o;
+      b.onclick=()=>{
+        if(b.disabled)return;
+        d.querySelectorAll('.quiz-opt').forEach(x=>x.disabled=true);
+        if(oi===q.c){b.classList.add('correct');earn++;fb.className='feedback ok';fb.innerHTML='✅ '+q.e;}
+        else{b.classList.add('wrong');d.querySelectorAll('.quiz-opt')[q.c].classList.add('correct');fb.className='feedback err';fb.innerHTML='❌ '+q.e;}
+        fb.classList.remove('hidden'); ans++;
+        if(ans===tot){S.scores['repaso']={earn,tot};save();showRepaso(earn,tot);}
+      };
+      d.appendChild(b);
+    });
+    d.appendChild(fb); C.appendChild(d);
+    if(qi<tot-1){const hr=document.createElement('div');hr.style.cssText='border-top:1.5px dashed #FDE68A;margin:8px 0 18px;';C.appendChild(hr);}
+  });
+}
+
+function showRepaso(earn,tot){
+  const pct=Math.round(earn/tot*100);
+  let m='🥇',msg='¡Excelente! Ya estás lista para el secundario.',sub='Más del 80%. ¡Campeona!';
+  if(pct<80&&pct>=60){m='🥈';msg='¡Muy bien hecho!';sub='Repasá los temas donde te equivocaste.';}
+  if(pct<60){m='🥉';msg='¡Seguí estudiando!';sub='Volvé a los módulos anteriores.';}
+  document.getElementById('r-medal').textContent=m;
+  document.getElementById('r-score').textContent=earn+'/'+tot;
+  document.getElementById('r-msg').textContent=msg;
+  document.getElementById('r-sub').textContent=sub;
+  document.getElementById('repaso-result').classList.remove('hidden');
+}
+
+// ═══════════ PROGRESO ═══════════
+const qMeta={
+  'num1':{n:'Quiz 1: Sistema de Numeración',icon:'🔢',area:'mat'},
+  'num2':{n:'Quiz 2: Problemas de la Vida Real',icon:'🛒',area:'mat'},
+  'num3':{n:'Quiz 3: Fracciones',icon:'🍕',area:'mat'},
+  'num4':{n:'Quiz 4: Números Decimales',icon:'💰',area:'mat'},
+  'num5':{n:'Quiz 5: Porcentajes',icon:'💯',area:'mat'},
+  'num6':{n:'Quiz 6: MCM, MCD y Potenciación',icon:'🔬',area:'mat'},
+  'num7':{n:'Quiz 7: Calculá — Escribe el resultado',icon:'✏️',area:'mat'},
+  'geo1':{n:'Quiz 8: Ángulos y Triángulos',icon:'🔺',area:'geo'},
+  'geo2':{n:'Quiz 9: Perímetro y Área',icon:'📏',area:'geo'},
+  'geo3':{n:'Quiz 10: Cuerpos Geométricos',icon:'🧊',area:'geo'},
+  'geo4':{n:'Quiz 11: Calculá — Geometría',icon:'✏️',area:'geo'},
+  'gram1':{n:'Quiz 12: Clases de Palabras',icon:'🏷️',area:'len'},
+  'gram2':{n:'Quiz 13: Tiempos Verbales',icon:'🕐',area:'len'},
+  'gram3':{n:'Quiz 14: Sujeto y Predicado',icon:'🔍',area:'len'},
+  'gram4':{n:'Quiz 15: Ortografía',icon:'✍️',area:'len'},
+  'gram5':{n:'Quiz 16: Completar Oraciones',icon:'🖊️',area:'len'},
+  'tilde':{n:'Quiz 17: Tilde Diacrítica',icon:'🔗',area:'len'},
+  'txt1':{n:'Quiz 18: Tipos de Texto',icon:'📄',area:'txt'},
+  'comprension':{n:'Quiz: Comprensión Lectora',icon:'📖',area:'txt'},
+  'txt2':{n:'Quiz 19: Conectores',icon:'🔗',area:'txt'},
+  'textos':{n:'Quiz 20: Relacionar Textos',icon:'🔗',area:'txt'},
+  'txt3':{n:'Quiz 21: Completar Textos',icon:'📝',area:'txt'},
+  'repaso':{n:'Repaso Final Integrador',icon:'🏆',area:'rep'},
+};
+
+function renderProg(){
+  let te=0,tt=0;
+  const dl=document.getElementById('prog-detail'); dl.innerHTML='';
+  const recs=[];
+  const areas={mat:'🔢 Matemática — Números',geo:'📐 Matemática — Geometría',len:'🔤 Lengua — Gramática',txt:'📚 Lengua — Textos',rep:'🏆 Repaso Final'};
+  const grouped={};
+  Object.entries(qMeta).forEach(([id,m])=>{if(!grouped[m.area])grouped[m.area]=[];grouped[m.area].push({id,...m});});
+  Object.entries(areas).forEach(([area,aname])=>{
+    if(!grouped[area])return;
+    const ah=document.createElement('div');
+    ah.style.cssText='font-family:"Fredoka One",cursive;font-size:15px;color:#4C1D95;margin:14px 0 8px;padding-bottom:6px;border-bottom:2px solid #EDE9FE;';
+    ah.textContent=aname; dl.appendChild(ah);
+    grouped[area].forEach(({id,n,icon})=>{
+      const sc=S.scores[id];
+      const d=document.createElement('div'); d.style.marginBottom='12px';
+      const hdr=document.createElement('div'); hdr.style.cssText='display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;';
+      const ns=document.createElement('span'); ns.style.cssText='font-size:13px;font-weight:700;color:#374151;'; ns.textContent=icon+' '+n;
+      const ss=document.createElement('span'); ss.style.cssText='font-size:12px;font-weight:800;color:#7C3AED;';
+      const bar=document.createElement('div'); bar.className='prog-bar';
+      const fill=document.createElement('div'); fill.className='prog-fill';
+      if(sc){
+        const pct=Math.round(sc.earn/sc.tot*100);
+        ss.textContent=sc.earn+'/'+sc.tot+' ('+pct+'%)';
+        fill.style.width=pct+'%';
+        fill.style.background=pct>=80?'#10B981':pct>=60?'#F59E0B':'#EF4444';
+        te+=sc.earn; tt+=sc.tot;
+        if(pct<70)recs.push({n,icon,pct});
+      } else { ss.textContent='Pendiente'; ss.style.color='#9CA3AF'; fill.style.width='0%'; fill.style.background='#E5E7EB'; }
+      bar.appendChild(fill); hdr.appendChild(ns); hdr.appendChild(ss); d.appendChild(hdr); d.appendChild(bar); dl.appendChild(d);
+    });
+  });
+  document.getElementById('tot-pts').textContent=te;
+  document.getElementById('tot-label').textContent='de '+tt+' puntos posibles completados';
+  const pct=tt>0?Math.round(te/tt*100):0;
+  let stars='⭐';
+  if(pct>=20)stars='⭐⭐';
+  if(pct>=40)stars='⭐⭐⭐';
+  if(pct>=60)stars='⭐⭐⭐⭐';
+  if(pct>=80)stars='⭐⭐⭐⭐⭐';
+  document.getElementById('tot-stars').textContent=stars;
+  const rl=document.getElementById('rec-list'); rl.innerHTML='';
+  if(recs.length===0&&tt>0){rl.innerHTML='<div style="background:#D1FAE5;border-radius:12px;padding:14px;border:2px solid #6EE7B7;font-size:14px;font-weight:700;color:#065F46;">🎉 ¡Excelente! Sin áreas críticas. ¡Sos una crack!</div>';}
+  else if(recs.length===0){rl.innerHTML='<p style="color:#6B7280;font-size:13px;font-weight:600;">Completá actividades para ver recomendaciones.</p>';}
+  else{recs.forEach(r=>{const d=document.createElement('div');d.style.cssText='background:#FEF3C7;border-radius:12px;padding:10px 14px;border:2px solid #FDE68A;font-size:13px;font-weight:700;color:#92400E;margin-bottom:8px;';d.innerHTML=r.icon+' <strong>'+r.n+'</strong>: '+r.pct+'% → Te recomendamos repasarlo.';rl.appendChild(d);});}
+}
+
+function resetAll(){
+  Object.keys(S.scores).forEach(k=>delete S.scores[k]);
+  save(); location.reload();
+}
+
+// ═══════════ DATOS ═══════════
+
+// --- NUM 1: Numeración ---
+const dNum1=[
+  {q:'¿Cómo se escribe en palabras el número 4.302.015?',opts:['Cuatro millones trescientos dos mil quince','Cuatro millones trescientos veinte mil quince','Cuarenta y tres millones dos mil quince','Cuatro millones trescientos dos'],c:0,e:'4.302.015 = cuatro millones trescientos dos mil quince.'},
+  {q:'¿Qué cifra ocupa el lugar de las decenas de millar en 367.841?',opts:['3','6','8','7'],c:1,e:'367.841 → 3=centenas de millar, 6=decenas de millar, 7=unidades de millar.'},
+  {q:'¿Cuál es el número que va entre 999.999 y 1.000.001?',opts:['999.998','999.000','1.000.000','1.001.000'],c:2,e:'999.999 + 1 = 1.000.000 (un millón).'},
+  {q:'Ordená de mayor a menor: 78.500 / 785.000 / 7.850 / 78.050',opts:['785.000 > 78.500 > 78.050 > 7.850','78.500 > 785.000 > 78.050 > 7.850','785.000 > 78.050 > 78.500 > 7.850','7.850 > 78.050 > 78.500 > 785.000'],c:0,e:'Comparamos por la cantidad de dígitos primero. 785.000 tiene 6 cifras, es el mayor.'},
+  {q:'¿Cuál es el valor posicional del 5 en 2.531.840?',opts:['5 decenas','5 centenas de millar','5 unidades de millar','5 decenas de millar'],c:1,e:'En 2.531.840 el 5 está en la posición de centenas de millar = 500.000.'},
+];
+
+// --- NUM 2: Problemas reales ---
+const dNum2=[
+  {q:'La escuela compró 24 cajas con 36 lápices cada una. ¿Cuántos lápices compraron en total?',opts:['864','724','648','900'],c:0,e:'24 × 36 = 864 lápices en total.'},
+  {q:'Sofía tiene $12.450 y gasta $7.895 en ropa. ¿Cuánto le queda?',opts:['$4.445','$4.555','$4.455','$5.445'],c:1,e:'12.450 − 7.895 = 4.555.'},
+  {q:'Si entre 8 amigos juntaron $1.680, ¿cuánto puso cada uno?',opts:['$200','$210','$190','$220'],c:1,e:'1.680 ÷ 8 = 210. Cada uno puso $210.'},
+  {q:'Un tren recorre 356 km por hora. ¿Cuántos km recorre en 4 horas?',opts:['1.324 km','1.424 km','1.524 km','1.224 km'],c:1,e:'356 × 4 = 1.424 km.'},
+  {q:'En una canasta hay 15 manzanas, 23 naranjas y 12 peras. ¿Cuántas frutas hay en total?',opts:['48','50','45','40'],c:1,e:'15 + 23 + 12 = 50 frutas.'},
+  {q:'Si 5 facturas cuestan $1.250 en total, ¿cuánto cuesta 1 sola?',opts:['$200','$250','$300','$350'],c:1,e:'1.250 ÷ 5 = 250. Cada factura cuesta $250.'},
+];
+
+// --- NUM 3: Fracciones ---
+const dNum3=[
+  {q:'¿Cuál fracción es mayor: 5/8 ó 3/4?',opts:['5/8','3/4','Son iguales','No se puede comparar'],c:1,e:'3/4 = 6/8. Entonces 6/8 > 5/8. La fracción 3/4 es mayor.'},
+  {q:'¿Cuánto es 2/5 + 1/5?',opts:['3/10','2/5','3/5','1/5'],c:2,e:'Mismo denominador: 2/5 + 1/5 = 3/5.'},
+  {q:'¿Cuánto es 3/4 − 1/4?',opts:['2/0','2/8','2/4','4/4'],c:2,e:'Mismo denominador: 3/4 − 1/4 = 2/4 = 1/2.'},
+  {q:'¿Cuánto es 1/3 + 1/6? (distinto denominador)',opts:['2/9','2/6','3/6','1/2'],c:2,e:'MCM(3,6)=6. 1/3=2/6. 2/6+1/6=3/6=1/2.'},
+  {q:'¿Cuál es la fracción equivalente a 3/4?',opts:['6/9','9/12','8/10','4/6'],c:1,e:'3/4 × 3/3 = 9/12. Son equivalentes.'},
+  {q:'Ana comió 2/6 de una pizza. ¿Cuánto queda de la pizza?',opts:['4/6','3/6','1/6','2/6'],c:0,e:'El total es 6/6. Queda: 6/6 − 2/6 = 4/6.'},
+  {q:'¿Cuánto es 2/3 × 3/4?',opts:['5/7','6/12','1/2','2/4'],c:1,e:'2×3 / 3×4 = 6/12 = 1/2.'},
+];
+
+// --- NUM 4: Decimales ---
+const dNum4=[
+  {q:'¿Cuál de estos números es el mayor? 0,45 / 0,9 / 0,39 / 0,90',opts:['0,45','0,39','0,9 y 0,90 (son iguales)','0,39'],c:2,e:'0,9 = 0,90 son el mismo número. Y 0,9 > 0,45 > 0,39.'},
+  {q:'¿Cuánto es 3,5 + 2,75?',opts:['5,25','6,25','5,75','6,75'],c:1,e:'3,5 + 2,75 = 6,25.'},
+  {q:'¿Cuánto es 10 − 4,3?',opts:['5,7','6,3','5,3','6,7'],c:0,e:'10 − 4,3 = 5,7. (10,0 − 4,3 = 5,7)'},
+  {q:'Si una botella de 1 litro cuesta $350 y media de 500 ml cuesta $200, ¿cuál es más conveniente por litro?',opts:['La de 1 litro','La de 500 ml','Son iguales','No se puede comparar'],c:0,e:'La de 1 litro cuesta $350/L. La de 500 ml: $200 × 2 = $400/L. La de 1 litro es más barata.'},
+  {q:'¿Cuánto es 4,2 × 3?',opts:['12,6','12,2','13,6','11,6'],c:0,e:'4,2 × 3 = 12,6.'},
+  {q:'En el número 7,385, ¿qué cifra está en el lugar de los centésimos?',opts:['7','3','8','5'],c:2,e:'7,385: 7=unidades, 3=décimos, 8=centésimos, 5=milésimos.'},
+];
+
+// --- NUM 5: Porcentajes ---
+const dNum5=[
+  {q:'Una zapatilla cuesta $15.000 y tiene 25% de descuento. ¿Cuánto cuesta con el descuento?',opts:['$11.250','$12.000','$10.500','$13.500'],c:0,e:'25% de 15.000 = 3.750. 15.000 − 3.750 = $11.250.'},
+  {q:'En una clase de 30 alumnos, el 60% aprobó el examen. ¿Cuántos aprobaron?',opts:['12','18','15','20'],c:1,e:'60% de 30 = 30 × 0,60 = 18 alumnos.'},
+  {q:'Juliana ahorraba $1.000 por mes y ahora ahorra $1.200. ¿Cuánto aumentó su ahorro?',opts:['10%','15%','20%','25%'],c:2,e:'Aumento = 200. 200/1000 × 100 = 20%.'},
+  {q:'Si 6 bolsas de arroz cuestan $1.800, ¿cuánto cuestan 10 bolsas?',opts:['$3.000','$2.800','$2.500','$3.600'],c:0,e:'1 bolsa = $300. 10 × $300 = $3.000.'},
+  {q:'¿Cuánto es el 15% de 200?',opts:['25','30','20','15'],c:1,e:'15% de 200 = 200 × 0,15 = 30.'},
+];
+
+// --- NUM 6: MCM, MCD, potenciación ---
+const dNum6=[
+  {q:'¿Cuál es el MCM de 8 y 12?',opts:['4','96','24','48'],c:2,e:'Múltiplos de 8: 8,16,24... Múltiplos de 12: 12,24... MCM = 24.'},
+  {q:'¿Cuál es el MCD de 24 y 36?',opts:['4','6','12','8'],c:2,e:'Divisores de 24: 1,2,3,4,6,8,12,24. Divisores de 36: 1,2,3,4,6,9,12,18,36. MCD = 12.'},
+  {q:'¿Cuánto es 5² (cinco al cuadrado)?',opts:['10','15','20','25'],c:3,e:'5² = 5 × 5 = 25.'},
+  {q:'¿Cuánto es √49?',opts:['6','7','8','9'],c:1,e:'√49 = 7 porque 7 × 7 = 49.'},
+  {q:'¿Cuánto es 2⁵?',opts:['10','16','32','64'],c:2,e:'2⁵ = 2 × 2 × 2 × 2 × 2 = 32.'},
+  {q:'Dos semáforos cambian a verde al mismo tiempo. Uno cambia cada 4 minutos y el otro cada 6. ¿Cuándo vuelven a coincidir?',opts:['A los 10 minutos','A los 12 minutos','A los 24 minutos','A los 8 minutos'],c:1,e:'MCM(4,6) = 12. Se sincronizan cada 12 minutos.'},
+];
+
+// --- NUM 7: Completar cálculos ---
+const dNum7=[
+  {q:'¿Cuánto es 125 + 378?',a:'503',e:'125 + 378 = 503.'},
+  {q:'¿Cuánto es 1.000 − 437?',a:'563',e:'1.000 − 437 = 563.'},
+  {q:'¿Cuánto es 36 × 25?',a:'900',e:'36 × 25 = 900.'},
+  {q:'¿Cuánto es 630 ÷ 7?',a:'90',e:'630 ÷ 7 = 90.'},
+  {q:'¿Cuánto es el 10% de 850?',a:'85',e:'10% de 850 = 850 ÷ 10 = 85.'},
+  {q:'¿Cuánto es √64?',a:'8',e:'√64 = 8 porque 8 × 8 = 64.'},
+  {q:'¿Cuánto es 3³ (tres al cubo)?',a:'27',e:'3³ = 3 × 3 × 3 = 27.'},
+];
+
+// --- GEO 1: Ángulos y triángulos ---
+const dGeo1=[
+  {q:'Un triángulo tiene ángulos de 60° y 80°. ¿Cuánto mide el tercer ángulo?',opts:['40°','50°','60°','30°'],c:0,e:'Los 3 ángulos suman 180°. 180 − 60 − 80 = 40°.'},
+  {q:'¿Cómo se llama un triángulo que tiene un ángulo de exactamente 90°?',opts:['Acutángulo','Obtusángulo','Rectángulo','Equilátero'],c:2,e:'El triángulo rectángulo tiene uno de sus ángulos igual a 90°.'},
+  {q:'Un ángulo de 135°, ¿cómo se clasifica?',opts:['Agudo','Recto','Obtuso','Llano'],c:2,e:'Un ángulo obtuso mide entre 90° y 180°. 135° es obtuso.'},
+  {q:'¿Cuántos grados mide cada ángulo de un triángulo equilátero?',opts:['90°','45°','60°','30°'],c:2,e:'Los 3 ángulos son iguales y suman 180°. 180 ÷ 3 = 60°.'},
+  {q:'Un triángulo con lados de 5, 5 y 8 cm es:',opts:['Equilátero','Isósceles','Escaleno','Rectángulo'],c:1,e:'Isósceles: tiene 2 lados iguales (5 y 5).'},
+  {q:'¿Cuánto suman los ángulos interiores de un cuadrilátero?',opts:['180°','270°','360°','320°'],c:2,e:'Los 4 ángulos interiores de cualquier cuadrilátero suman siempre 360°.'},
+];
+
+// --- GEO 2: Perímetro y área ---
+const dGeo2=[
+  {q:'Una cancha de fútbol mide 100 m de largo y 60 m de ancho. ¿Cuál es su perímetro?',opts:['160 m','320 m','240 m','6.000 m'],c:1,e:'P = 2 × (100 + 60) = 2 × 160 = 320 m.'},
+  {q:'Esa misma cancha, ¿cuántos metros cuadrados tiene? (área)',opts:['160 m²','320 m²','6.000 m²','3.000 m²'],c:2,e:'A = base × altura = 100 × 60 = 6.000 m².'},
+  {q:'Un cuadrado de 7 cm de lado. ¿Cuál es su perímetro?',opts:['14 cm','21 cm','28 cm','49 cm'],c:2,e:'P = 4 × lado = 4 × 7 = 28 cm.'},
+  {q:'Un triángulo tiene base 8 cm y altura 6 cm. ¿Cuál es su área?',opts:['48 cm²','14 cm²','24 cm²','12 cm²'],c:2,e:'A del triángulo = (base × altura) / 2 = (8 × 6) / 2 = 48/2 = 24 cm².'},
+  {q:'El piso de una habitación cuadrada mide 4 m de lado. ¿Cuántos m² tiene?',opts:['8 m²','12 m²','16 m²','20 m²'],c:2,e:'A = lado² = 4² = 4 × 4 = 16 m².'},
+  {q:'Un triángulo rectángulo tiene catetos de 3 cm y 4 cm. Por Pitágoras, su hipotenusa mide:',opts:['5 cm','7 cm','6 cm','4,5 cm'],c:0,e:'Pitágoras: h² = 3² + 4² = 9 + 16 = 25. h = √25 = 5 cm.'},
+];
+
+// --- GEO 3: Cuerpos 3D ---
+const dGeo3=[
+  {q:'Un cubo tiene aristas de 3 cm. ¿Cuál es su volumen?',opts:['9 cm³','18 cm³','27 cm³','6 cm³'],c:2,e:'V = lado³ = 3³ = 3 × 3 × 3 = 27 cm³.'},
+  {q:'¿Cuántas caras tiene una pirámide de base cuadrada?',opts:['4','5','6','8'],c:1,e:'Una pirámide de base cuadrada tiene 1 base cuadrada + 4 caras triangulares = 5 caras.'},
+  {q:'Un prisma rectangular mide 5×4×3 cm. ¿Cuál es su volumen?',opts:['12 cm³','40 cm³','60 cm³','24 cm³'],c:2,e:'V = largo × ancho × alto = 5 × 4 × 3 = 60 cm³.'},
+  {q:'¿Cuántos vértices tiene un cubo?',opts:['6','8','12','4'],c:1,e:'Un cubo tiene 8 vértices (las 8 esquinas).'},
+  {q:'¿Qué cuerpo geométrico tiene dos bases circulares y una cara lateral curva?',opts:['Esfera','Pirámide','Cilindro','Cono'],c:2,e:'El cilindro tiene dos bases circulares y una superficie lateral curva.'},
+];
+
+// --- GEO 4: Completar geometría ---
+const dGeo4=[
+  {q:'Un rectángulo mide 12 cm de base y 8 cm de altura. ¿Cuál es su área? (solo el número en cm²)',a:'96',e:'A = 12 × 8 = 96 cm².'},
+  {q:'Un triángulo equilátero tiene lados de 9 cm. ¿Cuál es su perímetro? (solo el número en cm)',a:'27',e:'P = 3 × 9 = 27 cm.'},
+  {q:'Un cuadrado tiene un perímetro de 36 cm. ¿Cuánto mide cada lado? (solo el número en cm)',a:'9',e:'Perímetro = 4 × lado → 36 ÷ 4 = 9 cm.'},
+  {q:'¿Cuánto suman los ángulos de un triángulo? (escribe el número en grados)',a:'180',e:'La suma de los ángulos interiores de cualquier triángulo es siempre 180°.'},
+  {q:'Un cubo de 2 cm de arista. ¿Cuánto es su volumen en cm³? (escribe solo el número)',a:'8',e:'V = 2³ = 2 × 2 × 2 = 8 cm³.'},
+];
+
+// --- GRAM 1: Clases de palabras ---
+const dGram1=[
+  {q:'¿Cuál de estas palabras es un SUSTANTIVO ABSTRACTO?',opts:['árbol','tristeza','rápido','correr'],c:1,e:'"Tristeza" es abstracto: no se puede ver ni tocar, es un sentimiento.'},
+  {q:'En "La niña inteligente estudia matemática", el ADJETIVO es:',opts:['niña','inteligente','estudia','matemática'],c:1,e:'"Inteligente" describe cómo es la niña, por eso es adjetivo.'},
+  {q:'¿Cuál de estas palabras es un VERBO en tiempo presente?',opts:['saltó','saltará','salta','saltando'],c:2,e:'"Salta" expresa una acción que ocurre ahora → presente.'},
+  {q:'¿Qué clase de palabra es "muy" en "Corre muy rápido"?',opts:['Adjetivo','Sustantivo','Adverbio','Verbo'],c:2,e:'"Muy" modifica al adverbio "rápido" → es un adverbio.'},
+  {q:'"Ella se peinó el cabello." ¿Qué función cumple "ella"?',opts:['Sustantivo','Artículo','Pronombre personal','Adjetivo'],c:2,e:'"Ella" reemplaza al nombre de una persona → es un pronombre personal.'},
+  {q:'"Los libros de la biblioteca son viejos." ¿Cuál es el artículo?',opts:['los','libros','biblioteca','viejos'],c:0,e:'"Los" es el artículo determinado que acompaña al sustantivo "libros".'},
+  {q:'¿Cuál de estas es una PREPOSICIÓN?',opts:['pero','también','para','porque'],c:2,e:'"Para" es una preposición que indica dirección, destino o finalidad.'},
+];
+
+// --- GRAM 2: Tiempos verbales ---
+const dGram2=[
+  {q:'"Mañana iré al cine con mis amigas." El verbo IRÉ está en:',opts:['Pasado','Presente','Futuro','Condicional'],c:2,e:'"Iré" expresa una acción que ocurrirá → futuro simple.'},
+  {q:'"Cuando era chica, vivía en Córdoba." El verbo VIVÍA está en:',opts:['Presente','Futuro','Pasado imperfecto','Pasado perfecto'],c:2,e:'"Vivía" expresa una acción pasada habitual o continua → pretérito imperfecto.'},
+  {q:'¿Cuál de estas opciones está en TIEMPO PRESENTE?',opts:['Ella cantó','Ella cantará','Ella canta','Ella había cantado'],c:2,e:'"Canta" expresa una acción que ocurre ahora → presente.'},
+  {q:'"Los chicos ya habían terminado cuando llegó el maestro." El verbo HABÍAN TERMINADO está en:',opts:['Pretérito perfecto simple','Pretérito pluscuamperfecto','Futuro compuesto','Presente perfecto'],c:1,e:'Había(n) + participio = pretérito pluscuamperfecto. Expresa acción anterior a otra pasada.'},
+  {q:'¿Cómo se conjuga "comer" en primera persona del futuro?',opts:['Comí','Comeré','Como','Comía'],c:1,e:'Yo + comeré → primera persona del singular del futuro simple.'},
+  {q:'"Van a jugar al parque esta tarde." Está en:',opts:['Pasado','Presente','Futuro perifrástico','Condicional'],c:2,e:'"Van a + infinitivo" es el futuro perifrástico. Expresa acción próxima.'},
+];
+
+// --- GRAM 3: Sujeto y predicado ---
+const dGram3=[
+  {q:'¿Cuál es el SUJETO de "El perro negro ladra fuerte"?',opts:['El perro negro','ladra fuerte','fuerte','El perro'],c:0,e:'"El perro negro" responde ¿quién ladra? → es el sujeto.'},
+  {q:'¿Cuál es el NÚCLEO DEL PREDICADO en "Mi mamá preparó una torta deliciosa"?',opts:['mamá','Mi mamá','preparó','torta'],c:2,e:'El núcleo del predicado es siempre el verbo principal: "preparó".'},
+  {q:'"Llovió toda la noche." ¿Cuál es el sujeto?',opts:['toda la noche','la noche','Llovió','Sujeto tácito (no aparece)'],c:3,e:'Los verbos meteorológicos (llover, nevar) no tienen sujeto → sujeto tácito/impersonal.'},
+  {q:'¿Cuál de estas oraciones tiene sujeto TÁCITO?',opts:['"Los chicos corren"','"Viajamos a Mendoza"','"La maestra explicó"','"El sol brilla fuerte"'],c:1,e:'"Viajamos" → el sujeto es "nosotros" pero no aparece en la oración → sujeto tácito.'},
+  {q:'En "Las mariposas azules vuelan sobre las flores", el SUJETO es:',opts:['Las mariposas azules','vuelan sobre las flores','sobre las flores','Las mariposas'],c:0,e:'"Las mariposas azules" (artículo + sustantivo + adjetivo) es el sujeto completo.'},
+];
+
+// --- GRAM 4: Ortografía ---
+const dGram4=[
+  {q:'¿La palabra "joven" es aguda, grave o esdrújula?',opts:['Aguda','Grave','Esdrújula','No tiene clasificación'],c:1,e:'JO-ven: el golpe va en la penúltima sílaba → grave. Termina en N → ¡ojo! Las graves que terminan en n SÍ llevan tilde... espera: termina en N pero es grave... sería "jóven". Sin embargo "joven" no lleva tilde porque la norma es: grave sin tilde si termina en n,s,vocal. Revisá: la RAE indica que JOVEN no lleva tilde porque es grave terminada en N. ✅',},
+  {q:'¿Cuál de estas palabras está correctamente escrita?',opts:['arbol','lapiz','cárcel','cafe'],c:2,e:'"Cárcel" es grave (CÁR-cel), termina en L → lleva tilde. Las otras faltan la tilde (árbol, lápiz) o la tienen mal (café es aguda).'},
+  {q:'¿Qué signo se usa para separar elementos de una lista en una oración?',opts:['El punto','La coma','Los dos puntos','El punto y coma'],c:1,e:'La coma separa elementos de una enumeración: "Compré manzanas, peras, naranjas y uvas."'},
+  {q:'"¡Qué día tan hermoso!" Los signos de exclamación indican:',opts:['Una pregunta','Emoción, sorpresa o énfasis','El fin del texto','Una pausa larga'],c:1,e:'Los signos de exclamación marcan emoción, entusiasmo, sorpresa o énfasis.'},
+  {q:'¿Cuál de estas palabras se escribe con B?',opts:['a_andonar','o_jeto','ra_iar','reci_ir'],c:3,e:'"Recibir" se escribe con B porque los verbos terminados en -bir se escriben con B (excepto vivir, servir, hervir).'},
+  {q:'La palabra "médico" es:',opts:['Aguda sin tilde','Grave con tilde','Esdrújula','Grave sin tilde'],c:2,e:'MÉ-di-co: el golpe cae en la antepenúltima sílaba → esdrújula. Siempre llevan tilde.'},
+];
+
+// --- GRAM 5: Completar oraciones ---
+const dGram5=[
+  {q:'Completá con el tiempo verbal correcto (pasado): "Ayer yo _____ al parque." (verbo IR)',a:['fui'],e:'En pasado perfecto: yo fui (irregular).'},
+  {q:'¿Qué clase de palabra falta? "El gato ___ en el sillón." Necesitás un VERBO. Escribilo en presente.',a:['duerme','descansa','esta','está','juega','saltó'],e:'Un verbo en presente: duerme, descansa, juega, etc.'},
+  {q:'La palabra "México" es un sustantivo ___. Escribí: propio o común.',a:'propio',e:'Los nombres de países, ciudades y personas son sustantivos propios.'},
+  {q:'"No pude ir, ___ estaba enferma." Completá con el conector de CAUSA correcto.',a:['porque','ya que','puesto que'],e:'"Porque", "ya que" y "puesto que" expresan causa.'},
+  {q:'¿Cuál es el plural de "lápiz"? (escribilo)',a:'lapices',e:'Lápiz → lápices (se agrega -es y se pierde la Z).'},
+];
+
+// --- TXT 1: Tipos de texto ---
+const dTxt1=[
+  {q:'"Mezclar harina, huevos y leche. Batir hasta obtener una mezcla lisa. Cocinar en sartén por 3 minutos." ¿Qué tipo de texto es?',opts:['Narrativo','Argumentativo','Instructivo','Informativo'],c:2,e:'Un texto instructivo da pasos a seguir. Usa verbos en imperativo (mezclar, batir, cocinar).'},
+  {q:'"Consideramos que la tecnología en las aulas mejora el aprendizaje porque permite acceder a información actualizada." ¿Qué tipo es?',opts:['Narrativo','Argumentativo','Instructivo','Poético'],c:1,e:'Argumentativo: presenta una posición (tesis) y la defiende con argumentos.'},
+  {q:'¿Qué elemento NO pertenece a una noticia periodística?',opts:['Título llamativo','Fecha y lugar','Personajes de fantasía','Quién, qué, cuándo, dónde'],c:2,e:'Los personajes de fantasía pertenecen a textos literarios. La noticia informa sobre hechos reales.'},
+  {q:'¿Cuál es la parte FINAL de una carta?',opts:['Saludo inicial','Fecha y lugar','Despedida y firma','El tema central'],c:2,e:'La estructura de una carta termina con la despedida y la firma del remitente.'},
+  {q:'"En lo profundo del monte, vivía un espíritu llamado Coquena que cuidaba las llamas." ¿Qué tipo de texto narrativo es?',opts:['Cuento de ciencia ficción','Leyenda','Noticia','Texto de opinión'],c:1,e:'La leyenda mezcla elementos reales (el monte, las llamas) con fantásticos (el espíritu Coquena).'},
+  {q:'Un texto que tiene RIMA, VERSOS y expresa sentimientos es:',opts:['Crónica','Carta','Poema','Instructivo'],c:2,e:'El poema es un texto literario organizado en versos, con ritmo y a veces con rima.'},
+];
+
+// --- COMPRENSIÓN: El Pombero ---
+const dCompr=[
+  {q:'Según el texto, ¿cuándo aparece el Pombero?',opts:['En invierno','En las noches de verano','Al mediodía','Cuando llueve'],c:1,e:'El texto dice: "en las noches de verano, cuando el calor aprieta y los grillos cantan".'},
+  {q:'¿Qué hacen los abuelos del texto?',opts:['Ignoran al Pombero','Juegan con él','Advierten que hay que saludarlo con respeto','Lo mandan lejos'],c:2,e:'"Los abuelos advierten que si uno lo ve, debe saludarlo con respeto."'},
+  {q:'¿Qué le pasa a quien trata bien al Pombero?',opts:['Lo asustan','Sus vacas se escapan','Recibe su protección','Pierde las herramientas'],c:2,e:'"Quienes lo tratan bien reciben su protección."'},
+  {q:'¿A qué tipo de texto pertenece este fragmento?',opts:['Noticia','Instructivo','Leyenda','Texto de opinión'],c:2,e:'Es una leyenda: narra un relato tradicional que mezcla elementos reales (el monte) con fantásticos (el Pombero).'},
+];
+
+// --- TXT 2: Conectores ---
+const dTxt2=[
+  {q:'"Estudié mucho ___ no saqué buena nota." ¿Qué conector corresponde?',opts:['y también','porque','sin embargo','entonces'],c:2,e:'"Sin embargo" introduce un contraste: estudié pero el resultado fue diferente.'},
+  {q:'"Primero voy al súper, ___ preparo la cena." ¿Qué conector?',opts:['pero','sin embargo','luego','aunque'],c:2,e:'"Luego" es un conector temporal que indica secuencia de acciones.'},
+  {q:'"No salió ___ estaba lloviendo." ¿Cuál es la causa?',opts:['la lluvia','No salió','el conector PORQUE (causa)','El uso de "ya que"'],c:2,e:'El conector causal "porque" introduce la causa (la lluvia) del efecto (no salir).'},
+  {q:'"Es una buena película. ___, tiene algunos momentos lentos." ¿Qué conector adversativo corresponde?',opts:['Además','Sin embargo','También','Por lo tanto'],c:1,e:'"Sin embargo" introduce una contradicción o aclaración respecto a lo anterior.'},
+  {q:'"Comió mucho ___ se sintió mal." ¿Qué tipo de relación hay?',opts:['Adversativa','Temporal','Causal — consecuencia','Adición'],c:2,e:'Comer mucho es la CAUSA. Sentirse mal es la CONSECUENCIA. Se une con "por eso" / "entonces".'},
+];
+
+// --- TXT 3: Completar textos ---
+const dTxt3=[
+  {q:'Completá: "Era una noche oscura ___ silenciosa." ¿Qué conector de adición?',a:['y','e'],e:'"Y" o "e" suma ideas o elementos.'},
+  {q:'"El texto argumentativo tiene TESIS, _____ y conclusión." ¿Qué parte falta?',a:['argumentos'],e:'La estructura del texto argumentativo es: tesis + argumentos + conclusión.'},
+  {q:'¿Cómo se llama la parte del cuento donde se presenta el problema o conflicto? (una palabra)',a:['nudo','conflicto'],e:'El nudo es el momento central del cuento donde ocurre el conflicto o problema principal.'},
+  {q:'"El narrador es la voz que _____ la historia." ¿Qué verbo en presente completa la oración?',a:['cuenta','narra','relata'],e:'El narrador cuenta, narra o relata la historia.'},
+  {q:'El tipo de texto que da instrucciones usa verbos en modo _____.',a:['imperativo'],e:'Los textos instructivos usan el imperativo: "mezcle", "agregue", "bata".'},
+];
+
+// --- MATCHING: Tilde diacrítica ---
+const mTilde=[
+  {l:'él (pronombre)',r:'Reemplaza a una persona: "Él corrió."'},
+  {l:'el (artículo)',r:'Acompaña a un sustantivo: "el libro"'},
+  {l:'tú (pronombre)',r:'Segunda persona singular: "Tú puedes."'},
+  {l:'tu (posesivo)',r:'Indica pertenencia: "tu mochila"'},
+  {l:'sé (verbo saber)',r:'Conjugación de saber: "Yo sé la respuesta."'},
+  {l:'se (reflexivo)',r:'Pronombre reflexivo: "Se peinó."'},
+];
+
+// --- MATCHING: Textos con su tipo ---
+const mTextos=[
+  {l:'"Mezclar los ingredientes y hornear 30 minutos."',r:'Texto instructivo'},
+  {l:'"El cielo estaba rojo cuando llegó el extraño viajero."',r:'Texto narrativo'},
+  {l:'"Hoy a las 14h un incendio afectó el centro de la ciudad."',r:'Texto informativo (noticia)'},
+  {l:'"Creemos que el reciclaje es fundamental para salvar el planeta."',r:'Texto argumentativo'},
+  {l:'"Tus ojos son dos estrellas / que iluminan mi camino."',r:'Texto poético'},
+];
+
+// ═══════════ INIT ═══════════
+document.addEventListener('DOMContentLoaded',()=>{
+  load();
+  // Números
+  mkMC('q-num1','num1',dNum1);
+  mkMC('q-num2','num2',dNum2);
+  mkMC('q-num3','num3',dNum3);
+  mkMC('q-num4','num4',dNum4);
+  mkMC('q-num5','num5',dNum5);
+  mkMC('q-num6','num6',dNum6);
+  mkFill('q-num7','num7',dNum7);
+  // Geometría
+  mkMC('q-geo1','geo1',dGeo1);
+  mkMC('q-geo2','geo2',dGeo2);
+  mkMC('q-geo3','geo3',dGeo3);
+  mkFill('q-geo4','geo4',dGeo4);
+  // Gramática
+  mkMC('q-gram1','gram1',dGram1);
+  mkMC('q-gram2','gram2',dGram2);
+  mkMC('q-gram3','gram3',dGram3);
+  mkMC('q-gram4','gram4',dGram4);
+  mkFill('q-gram5','gram5',dGram5);
+  mkMatch('match-tilde','tilde',mTilde);
+  // Textos
+  mkMC('q-txt1','txt1',dTxt1);
+  mkMC('q-comprension','comprension',dCompr);
+  mkMC('q-txt2','txt2',dTxt2);
+  mkFill('q-txt3','txt3',dTxt3);
+  mkMatch('match-textos','textos',mTextos);
+  // Repaso
+  buildRepaso();
+});
+</script>
+</body>
+</html>
